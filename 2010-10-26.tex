@@ -1,0 +1,48 @@
+\section{VL vom 26.~Oktober 2010}
+
+Wir verwenden die Variablen 
+
+\begin{align}
+  x_{ij}^\alpha \quad\text{mit}\quad \alpha \in \set{M,S,K}, i \in \set{\I,\II,\III}, j \in \set{a,b}
+\end{align}
+
+Zum Beispiel repräsentiert die Variable $x_{\II a}^M$ die Aussage
+\enquote{Müller unterrichtet in Stunde \II Klasse $a$}.
+
+Wir modellieren nun das Problem wie folgt:
+
+\begin{itemize}
+  \item Jede Stunde wurd von einem passendem Lehrer unterrichtet
+  \begin{align}
+    \varphi_1 &=
+      \ANDop_{ij \in\set{\I a,\II a,\III b}} \biggl(x_{ij}^M \OR x_{ij}^K\biggr) \AND
+      \ANDop_{ij \in\set{\I b,\II a,\II b}}  \biggl(x_{ij}^S \OR x_{ij}^K\biggr)
+  \end{align}
+  
+  \item Jede Stunde wird von höchstens einem Lehrer unterrichtet:
+  \begin{align}
+    \varphi_2 &=
+      \ANDop_{i\in\set{\I,\II,\III}} \ANDop_{j\in\set{a,b}}
+        \NOT \biggl(x_{ij}^M \AND x_{ij}^S\biggr) \AND
+        \NOT \biggl(x_{ij}^M \OR x_{ij}^K\biggr) \AND
+        \NOT \biggl(x_{ij}^S \OR x_{ij}^K\biggr)
+  \end{align}
+  
+  \item Jeder Lehrer unterrichtet mindesten zwei Stunden:
+  \begin{align}
+    \varphi_3 &=
+      \ANDop_{\alpha\in\set{M,K,S}} \ORop_{\substack{i,i'\in\set{\I,\II,\III}\\ j,j'\in\set{a,b}\\ ij\not=i'j'}}
+        \biggl(x_{ij}^\alpha \AND x_{i'j'}^\alpha\biggr)
+  \end{align}
+  
+  \item Ein Lehrer kann nur eine Klasse zur Zeit unterrichten
+  \begin{align}
+    \varphi_4 &=
+      \ANDop_{\alpha\in\set{M,K,S}} \ANDop_{i\in\set{\I,\II,\III}}
+        \NOT \biggl(x_{ia}^\alpha \AND x_{ib}^\alpha\biggr)
+  \end{align}
+\end{itemize}
+
+Man sieht nun leicht, dass die möglichen Lösungen für das Zeitplanungsproblem
+ganau dem Belegungen $V$ entsprechen, die
+$\varphi_1 \AND \varphi_2 \AND \varphi_3 \AND \varphi_4$ erfüllen.

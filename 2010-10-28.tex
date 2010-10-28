@@ -1,0 +1,69 @@
+\section{VL vom 28.~Oktober 2010}
+
+\subsection{Ersetzungslemma}
+
+\begin{description}
+  \item[IA:]
+  Wenn $\vartheta$ atomar ist, muss $\vartheta = \varphi$. Dann $\vartheta'=\psi$,
+  also $\vartheta\EQUIV\vartheta'$ wegen $\psi\EQUIV\varphi$.
+
+  \item[IS:]
+  Wenn $\vartheta=\varphi$, argumentiere wir im IA. Sonst unterscheide drei Fälle:
+
+  \begin{enumerate}
+    \item $\vartheta = \NOT \vartheta_1$\\
+    $\vartheta'$ hat die Form $\NOT\vartheta'_1$ (wobei sich $\vartheta'_1$ aus
+    $\vartheta_1$ ergibt durch Ersetzen von $\varphi$ durch $\psi$. Nach IV gilt
+    $\vartheta_1\EQUIV\vartheta'_1$, nach Semantik von \enquote{$\NOT$} also
+    $\vartheta\EQUIV\vartheta'$.
+    
+    \item $\vartheta = \vartheta_1\OR\vartheta_2$\\
+    $\varphi$ wird entweder in $\vartheta_1$ ider in $\vartheta_2$ durch $\psi$
+    ersetzt. Wir betrachten nur den ersten Fall: dann
+    $\vartheta'=\vartheta'_1\OR\vartheta_2$, also $\vartheta\EQUIV\vartheta'$
+    
+    \item $\vartheta = \vartheta_1\AND\vartheta_2$\\
+    Analog zu 2.
+  \end{enumerate}
+  \qed
+\end{description}
+
+
+\subsection{Funktionale Vollständigkeit}
+
+Die Funktionen in $\mathcal{B}^0$ werden durch die Formeln $0,1$ dargestellt.
+Sei $n>0$ und $f\in\mathcal{B}^n$.
+
+Für jedes $x\in Var$ sei $x^1=x$ und $x^0=\NOT x$. Für jedes Tupel
+$f=(w_1,\dots,w_n)\in\set{0,1}^n$ sei $\varphi_f=x_1^{w_1}\AND\dots\AND x_n^{w_n}$.
+
+\textbf{Definiere}
+\begin{align}
+  \varphi_f = \ORop_{\substack{f\in\set{0,1}^n\\ f(t) = 1}} \varphi_t
+\end{align}
+
+\textbf{Behauptung:} $f_{\varphi_f} = f$
+
+Wenn $f(t) = 1$, dann ist $\varphi_t$ ein Disjunkt von $\varphi_f$. Also
+$f_{\varphi_f}(t) = V_t(\varphi_f)=1$. Wenn umgekehrt $f_{\varphi_f}(t) = 1$,
+dann $V_t(\varphi_f)=1$, also ist $\varphi_t$ Disjunkt von $\varphi_f$. Nach
+Definition von $\varphi_f$ also $f(t)=1$. \qed
+
+
+\subsection{Normalformen}
+
+Sei $\varphi$ eine Formel. Äquivalente Formel in DNF ($\OR\AND$):
+
+Konstruiere erst $f_\varphi$ mittels Wahrheitstafel, dann $\varphi_{f_\varphi}$
+wie im vorigen Beweis. Das Resultat ist offensichtlich in DNF und die
+Konstrktion ist effektiv.
+
+Aus der effektiven Konstruierbarkeit der DNF folgt auch die der KNF ($\AND\OR$).
+
+\begin{align}
+  \varphi &\EQUIV \NOT\NOT \varphi                                 &&\text{DNF!}\\
+          &\EQUIV \NOT\ORop_{i=1}^n \ANDop_{j=1}^{m_i} \ell_{i,j}  &&\text{de Morgan}\\
+          &\EQUIV \ANDop_{i=1}^n \NOT\ANDop_{j=1}^{m_1} \ell_{i,j} &&\text{de Morgan}\\
+          &\EQUIV \ANDop_{i=1}^n \ORop_{j=1}^{m_1} \NOT\ell_{i,j}  &&\text{KNF}
+\end{align}
+\qed
