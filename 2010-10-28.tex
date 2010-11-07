@@ -8,7 +8,7 @@
   also $\vartheta\EQUIV\vartheta'$ wegen $\psi\EQUIV\varphi$.
 
   \item[IS:]
-  Wenn $\vartheta=\varphi$, argumentiere wir im IA. Sonst unterscheide drei Fälle:
+  Wenn $\vartheta=\varphi$, argumentiere wir wie im IA. Sonst unterscheide drei Fälle "uber den "au"seren Junktor:
 
   \begin{enumerate}
     \item $\vartheta = \NOT \vartheta_1$\\
@@ -18,9 +18,9 @@
     $\vartheta\EQUIV\vartheta'$.
     
     \item $\vartheta = \vartheta_1\OR\vartheta_2$\\
-    $\varphi$ wird entweder in $\vartheta_1$ ider in $\vartheta_2$ durch $\psi$
+    $\varphi$ wird entweder in $\vartheta_1$ oder in $\vartheta_2$ durch $\psi$
     ersetzt. Wir betrachten nur den ersten Fall: dann
-    $\vartheta'=\vartheta'_1\OR\vartheta_2$, also $\vartheta\EQUIV\vartheta'$
+    $\vartheta'=\vartheta'_1\OR\vartheta_2$. Nach IV $\vartheta_1\EQUIV\vartheta'_1$, also $\vartheta\EQUIV\vartheta'$.
     
     \item $\vartheta = \vartheta_1\AND\vartheta_2$\\
     Analog zu 2.
@@ -29,12 +29,23 @@
 \end{description}
 
 
+\subsection{Boolsche Funktionen}
+$B^n$ hat $2^n$ m"ogliche Eingaben. Beispiel $B^2$:
+\begin{tabular}{l|l|l|l}
+Eingaben    & f1  & f2  & \dots \\
+\hline
+(0,0)       & 0   & 0   & \dots \\
+(0,1)       & 0   & 0   & \dots \\
+(1,0)       & 0   & 0   & \dots \\
+(1,1)       & 0   & 1   & \dots
+\end{tabular}
+
 \subsection{Funktionale Vollständigkeit}
 
 Die Funktionen in $\mathcal{B}^0$ werden durch die Formeln $0,1$ dargestellt.
 Sei $n>0$ und $f\in\mathcal{B}^n$.
 
-Für jedes $x\in Var$ sei $x^1=x$ und $x^0=\NOT x$. Für jedes Tupel
+Für jedes $x\in Var$ sei $x^1=x$ und $x^0=\NOT x$. Für jedes Tupel (für jede Eingabe)
 $f=(w_1,\dots,w_n)\in\set{0,1}^n$ sei $\varphi_f=x_1^{w_1}\AND\dots\AND x_n^{w_n}$.
 
 \textbf{Definiere}
