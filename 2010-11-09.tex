@@ -1,3 +1,29 @@
 \section{VL vom 09. November 2010}
 
+\subsection{Beweis Resolutionslemma}
+
+\begin{itemize}
+  \item $V \models  M \cup \set{C} \Rightarrow V \models  M$ trivial.
+  \item Es gelte $V\models M$. Ferner sei $C=(C_1\backslash \set{\ell}) \cup
+  (C_2\backslash \set{\overline{\ell}})$ mit $C_1,C_2 \in M$. Unterscheide zwei
+  Fälle:
+  \begin{itemize}
+    \item $V(\ell) = 1$. Wegen $V\models C_2$ dann auch $V\models C_2\backslash \set{\overline{\ell}}$.
+    \item $V(\ell) = 0$. Wegen $V\models C_1$ dann auch $V\models C_1\backslash \set{\overline{\ell}}$.
+  \end{itemize}
+  In beiden Fällen also $V\models C$.\qed
+\end{itemize}
+
+\subsubsection{Beispiel-Resolution}
+
+\begin{align}
+  M(\varphi) &= \set{\set{x_1}, \set{\NOT x_1, x_2}, \set{\NOT x_2, x_3}, \set{\NOT x_3}} = M \\
+  \Res^0(M)   &= M \\
+  \Res^1(M)   &= \Res^0(M) \cup \set{\set{x_2}, \set{\NOT x_1, x_3}, \set{\NOT x_2}} \\
+  \Res^2(M)   &= \Res^1(M) \cup \set{\set{x_3}, \set{\NOT x_1}, \square} \\
+  \Res^3(M)   &= \Res^2(M) = \Res^*(M)
+\end{align}
+
+\subsection{Beweis Resolutionssatz}
+
 
