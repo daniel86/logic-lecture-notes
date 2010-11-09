@@ -35,7 +35,61 @@
   \item[$\Rightarrow$] \textbf{Vollständigkeit}\par
   Wir zeigen
   \[
-    M \text{unerfüllbar} \IMPL \square \in \Res^*(M)
+    M\ \text{unerfüllbar} \IMPL \square \in \Res^*(M)
   \]
   per Induktion über $|\Var(M)|$.
+  \begin{description}
+    \item[IA] $\Var(M) \not= \emptyset$. Dann $M=\emptyset$ oder $M=\set{\square}$.
+    Da $\emptyset$ erfüllbar, muss $M=\set{\square}$ sein, also $\square\in M \subseteq \Res^*(M)$.
+    
+    \item[IS] Wähle $x\in \Var(M)$, konstruiere zwei Klauselmengen:
+    \begin{align}
+      K^+ &:= \set{C \backslash \set{\NOT x} | x \not\in C \in M} \\
+      K^- &:= \set{C \backslash \set{x} | \NOT x \not\in C \in M} 
+    \end{align}
+    Intuitiv entspricht $K^+$ dem Fall $V(x) = 1$: alle Klauseln $C$ mit $x \in C$
+    sind erfüllt und wurden gestrichen, aus den verbliebenen Klauseln kann
+    $\NOT x$ gestrichen werden (wenn vorhanden), denn $\NOT x$ kann die Klausel
+    nicht wahr machen.
+    
+    Wir zeigen:
+    \begin{enumerate}
+      \item $K^+$ und $K^-$ sind unerfüllbar
+      \item $\square \in \Res^*(M)$ oder $\set{\NOT x} \in \Res^*(M)$
+      \item $\square \in \Res^*(M)$ oder $\set{x} \in \Res^*(M)$
+    \end{enumerate}
+    
+    \item[(1)] Angenommen, $K^+$ ist erfüllbar und $V\models K^+$.
+    Erweitere $V$ durch $V(x)=1$. Man prüft leicht, dass $V\models M$. $\lightning$
+    
+    Unerfüllbarkeit $K^-$ analog.
+    
+    \item[(2)] Weil $K^+$ unerfüllbar liefert IV $\square\in\Res^*(K^+)$.
+    Also gibt es Klauseln $C_1,\dots,C_m$, so dass $C_m=\square$ und für $1\leq i\leq m$ gilt
+    \begin{enumerate}
+      \item $C_i \in K^+$ oder
+      \item $C_i$ ist Resolvente von $C_j,C_k$ für je gewisse $j,k < i$.
+    \end{enumerate}
+
+    \textbf{Fall 1:} alle Klauseln $C_i$ der Form (a) sind auch in $M$ (in keiner der
+    \enquote{Originalklauseln} kam $\NOT x$ vor). Dann prüft man leicht, dass
+    $C_1,\dots,C_m \in\Res^*(M)$, also $\square\in\Res^*(M)$.
+    
+    \textbf{Fall 2:} Für mind. ein $C_i$ der Form (a) ist $C_i\cup\set{\NOT x}\in M$.
+    Wir erhalten duch Wiedereinfügen von $\NOT x$ eine Folge von Klauseln
+    $C'_1,\dots,C'_m \in \Res^*(M)$, die beweist, dass $\set{\NOT x}\in\Res^*(M)$.
+    \begin{verbatim}
+      C_j     C_k       C_j\cup\set{\NOT x}   C_k\cup\set{\NOT x}
+         \   /      =>                \          /
+          C_i                      C_i\cup\set{\NOT x}
+    \end{verbatim}
+    \item[(3)] Analog zu (2) unter Verwendung von $K^-$.
+  \end{description}
+  Aus (2) und (3) folgt, dass $\square\in\Res^*(M)$ oder $\set{x},\set{\NOT x}\in\Res^*(M)$. Mit
+  \begin{verbatim}
+    \set{\NOT x}     \set{x}
+             \         /
+               \square
+  \end{verbatim}
+  dass auch $\square\in\Res^*(M)$.\qed
 \end{itemize}
