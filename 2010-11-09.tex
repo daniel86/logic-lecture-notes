@@ -78,6 +78,19 @@
     \textbf{Fall 2:} Für mind. ein $C_i$ der Form (a) ist $C_i\cup\set{\NOT x}\in M$.
     Wir erhalten duch Wiedereinfügen von $\NOT x$ eine Folge von Klauseln
     $C'_1,\dots,C'_m \in \Res^*(M)$, die beweist, dass $\set{\NOT x}\in\Res^*(M)$.
+    
+    \begin{tikzpicture}
+      \node (j) at (-1,1) {$C_j$};
+      \node (k) at (1,1) {$C_k$};
+      \node (i) at (0,-1) {$C_i$};
+      \draw (j)--(i) (k)--(i);
+      
+      \node at (2,0) {$\Rightarrow$};
+      \node (j) at (3,1) {$C_j\cup\set{\NOT x}$};
+      \node (k) at (5,1) {$C_k\cup\set{\NOT x}$};
+      \node (i) at (4,-1) {$C_i\cup\set{\NOT x}$};
+      \draw (j)--(i) (k)--(i);
+    \end{tikzpicture}
     \begin{verbatim}
       C_j     C_k       C_j\cup\set{\NOT x}   C_k\cup\set{\NOT x}
          \   /      =>                \          /
