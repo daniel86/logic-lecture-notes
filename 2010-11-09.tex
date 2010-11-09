@@ -79,30 +79,31 @@
     Wir erhalten duch Wiedereinfügen von $\NOT x$ eine Folge von Klauseln
     $C'_1,\dots,C'_m \in \Res^*(M)$, die beweist, dass $\set{\NOT x}\in\Res^*(M)$.
     
-    \begin{tikzpicture}
-      \node (j) at (-1,1) {$C_j$};
-      \node (k) at (1,1) {$C_k$};
-      \node (i) at (0,-1) {$C_i$};
-      \draw (j)--(i) (k)--(i);
-      
-      \node at (2,0) {$\Rightarrow$};
-      \node (j) at (3,1) {$C_j\cup\set{\NOT x}$};
-      \node (k) at (5,1) {$C_k\cup\set{\NOT x}$};
-      \node (i) at (4,-1) {$C_i\cup\set{\NOT x}$};
-      \draw (j)--(i) (k)--(i);
-    \end{tikzpicture}
-    \begin{verbatim}
-      C_j     C_k       C_j\cup\set{\NOT x}   C_k\cup\set{\NOT x}
-         \   /      =>                \          /
-          C_i                      C_i\cup\set{\NOT x}
-    \end{verbatim}
+    \begin{center}
+      \begin{tikzpicture}
+        \node (j) at (-1,1) {$C_j$};
+        \node (k) at (1,1) {$C_k$};
+        \node (i) at (0,0) {$C_i$};
+        \draw (j)--(i) (k)--(i);
+        
+        \node at (3,0.5) {$\Rightarrow$};
+        \node (j) at (5,1) {$C_j\cup\set{\NOT x}$};
+        \node (k) at (9,1) {$C_k\cup\set{\NOT x}$};
+        \node (i) at (7,0) {$C_i\cup\set{\NOT x}$};
+        \draw (j)--(i) (k)--(i);
+      \end{tikzpicture}
+    \end{center}
     \item[(3)] Analog zu (2) unter Verwendung von $K^-$.
   \end{description}
+
   Aus (2) und (3) folgt, dass $\square\in\Res^*(M)$ oder $\set{x},\set{\NOT x}\in\Res^*(M)$. Mit
-  \begin{verbatim}
-    \set{\NOT x}     \set{x}
-             \         /
-               \square
-  \end{verbatim}
+  \begin{center}
+    \begin{tikzpicture}
+      \node (j) at (-1,1) {$\set{\NOT x}$};
+      \node (k) at (1,1) {$\set{x}$};
+      \node (i) at (0,0) {$\square$};
+      \draw (j)--(i) (k)--(i);
+    \end{tikzpicture}
+  \end{center}
   dass auch $\square\in\Res^*(M)$.\qed
 \end{itemize}

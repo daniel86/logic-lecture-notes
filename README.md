@@ -18,4 +18,5 @@ There are some LaTeX packages involved, you should have installed:
 - xspace
 - textcomp
 - geometry
-
+- tikz (for graphics)
+- stmaryrd (defines `\lightning`)
