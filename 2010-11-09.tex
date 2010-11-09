@@ -26,4 +26,16 @@
 
 \subsection{Beweis Resolutionssatz}
 
-
+\begin{itemize}
+  \item[$\Leftarrow$] \textbf{Korrektheit}\par
+  Da $\square \in \Res^*(M)$, ist $\Res^*(M)$ unerfüllbar. Es genügt also zu zeigen, dass $\Res^*(M)\EQUIV M$.
+  Mittels Resolutionslemma und per Induktion über $i$ zeigt man leicht, dass $M\EQUIV \Res^i(M) \forall i \geq 0$.
+  Da sich über den endlich vielen Literalen in $M$ nur endlich viele Klauseln bilden lassen, ist $\Res^*(M)$ endlich, also $\Res^*(M) = \Res^i(M)$ für ein $i\geq 0$, damit $M\EQUIV \Res^*(M)$.
+  
+  \item[$\Rightarrow$] \textbf{Vollständigkeit}\par
+  Wir zeigen
+  \[
+    M \text{unerfüllbar} \IMPL \square \in \Res^*(M)
+  \]
+  per Induktion über $|\Var(M)|$.
+\end{itemize}
