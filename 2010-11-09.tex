@@ -107,3 +107,26 @@
   \end{center}
   dass auch $\square\in\Res^*(M)$.\qed
 \end{itemize}
+
+\subsection{Beispiel: Einheitsresolvente}
+
+\begin{center}
+  \begin{tikzpicture}
+    \node             (a) {$\set{\NOT x_1, \NOT x_2, \NOT x_3, x_4}$};
+    \node[right=of a] (b) {$\set{x_1}$};
+    \node[right=of b] (c) {$\set{x_2}$};
+    \node[right=of c] (d) {$\set{x_3}$};
+    \node[right=of d] (e) {$\set{\NOT x_3, \NOT x_4}$};
+    \node[xshift=4em,below=of a] (f) {$\set{\NOT x_2, \NOT x_3, x_4}$};
+    \node[xshift=5em,below=of f] (g) {$\set{\NOT x_3, x_4}$};
+    \node[xshift=5em,below=of g] (h) {$\set{x_4}$};
+    \node[xshift=5em,below=of h] (i) {$\set{\NOT x_3}$};
+    \node[xshift=6em,below=of i] (j) {$\square$};
+    
+    \draw (a)--(f) (b)--(f)
+      (c)--(g) (f)--(g)
+      (d)--(h) (g)--(h)
+      (e)--(i) (h)--(i)
+      (d)--(j) (i)--(j);
+  \end{tikzpicture}
+\end{center}
