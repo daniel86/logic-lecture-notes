@@ -31,35 +31,160 @@
 
   
   \begin{description}
-    \item[IA] Trivial nach Definition $V^0$ und wegen $M(\varphi) \subseteq \ERes^*(M(\varphi))$
-    \item[IS] Sei $x \in V^{i+1}$. Wenn $x\in V^i$ verwende IA.
+    \item[IA]
+    Trivial nach Definition $V^0$ und wegen $M(\varphi) \subseteq \ERes^*(M(\varphi))$
     
-    Sonst gibt es $x_1,\dots,x_k \in V^i$ mit $\set{\NOT x_1,\dots,\NOT x_k,x} \in M(\varphi)$.
-    Wegen folgen der Ableitung von $\set{x}$ mittels Einheitsresolution gilt $\set{x}\in \ERes^*(M(\varphi))$.
-    \begin{verbatim}
-      \set{\NOT x_1,\dots,x_k,x}   \set{x_1}   \set{x_k}
-                \                   /           /
-              \set{\NOT x_2,\dots,x_k,x}       /
-                                 .            /
-                                  .          /
-                                   .        /
-                                    \set{x}
-    \end{verbatim}
+    \item[IS]
+    Sei $x \in V^{i+1}$. Wenn $x\in V^i$ verwende IA.
+    
+    Sonst gibt es $x_1,\dots,x_k \in V^i$ mit $\set{\NOT x_1,\dots,\NOT x_k,x}\in M(\varphi)$.
+    Wegen folgen der Ableitung von $\set{x}$ mittels Einheitsresolution gilt
+    $\set{x}\in \ERes^*(M(\varphi))$.
+    
+    \begin{center}
+      \begin{tikzpicture}
+        \node (a) {$\set{\NOT x_1,\dots,x_k,x}$};
+        \node[right=of a] (b) {$\set{x_1}$};
+        \node[right=of b] (c) {\dots};
+        \node[right=of c] (d) {$\set{x_k}$};
+        \node[xshift=4em,below=of a] (e) {$\set{\NOT x_2,\dots,x_k,x}$};
+        \node[xshift=6em,below=of e] (f) {$\set{x}$};
+        \draw (a)--(e) (b)--(e) (d)--(f);
+        \draw[thick,loosely dotted] (e)--(f);
+      \end{tikzpicture}
+    \end{center}
     
     Sei $\varphi$ unerfüllbar. Mit ($*$) und ($**$) gibt es
     $\set{\NOT x_1,\dots,\NOT x_k}\in M(\varphi)$ mit
     $\set{x_1},\dots,\set{x_k}\in\Res^*(M(\varphi))$.
     Folgende Ableitung mittels Einheitsresolution zeigt
     $\square\in\ERes^*(M(\varphi))$.
-    \begin{verbatim}
-      \set{\NOT x_1,\dots,x_k}   \set{x_1}   \set{x_k}
-                \                 /           /
-              \set{\NOT x_2,\dots,x_k}       /
-                                 .          /
-                                  .        /
-                                   .      /
-                                   \square
-    \end{verbatim}
+    
+    \begin{center}
+      \begin{tikzpicture}
+        \node (a) {$\set{\NOT x_1,\dots,x_k}$};
+        \node[right=of a] (b) {$\set{x_1}$};
+        \node[right=of b] (c) {\dots};
+        \node[right=of c] (d) {$\set{x_k}$};
+        \node[xshift=4em,below=of a] (e) {$\set{\NOT x_2,\dots,x_k}$};
+        \node[xshift=6em,below=of e] (f) {$\square$};
+        \draw (a)--(e) (b)--(e) (d)--(f);
+        \draw[thick,loosely dotted] (e)--(f);
+      \end{tikzpicture}
+    \end{center}
     \qed
   \end{description}
 \end{description}
+
+\subsection{Beispiel Herleitbarkeit im Hilbert-Kalkül}
+
+Herleitung $x \IMPL x$.
+
+Herleitbare Formeln:
+\begin{enumerate}[label=(\alph*)]
+  \item $x \IMPL ((y\IMPL x)\IMPL x)$                                           \hfill Instanz Axiom 1
+  \item $(x\IMPL((y\IMPL x)\IMPL x)\IMPL((x\IMPL(y\IMPL x))\IMPL(x\IMPL x)))$   \hfill Instanz Axiom 2
+  \item $(x\IMPL(y\IMPL x))\IMPL (x\IMPL x))$                                   \hfill MP + (a) + (b)
+  \item $x\IMPL(y\IMPL x)$                                                      \hfill Instanz Axiom 1
+  \item $x\IMPL x$                                                              \hfill MP + (c) + (d)
+\end{enumerate}
+
+\subsection{Kompaktheitssatz}
+
+Wir bewisen Punkt 1 und dort nur \enquote{$\Leftarrow$}, denn \enquote{$\Rightarrow$} ist trivial.
+
+Wir nennen eine Menge $\Gamma\subseteq AL$ \textit{Limit-erfüllbar}, wenn jede
+endliche Teilmenge von $\Gamma$ erfüllbar ist. Sei also $\Gamma$ Limit-erfüllbar.
+Da $\Var$ abzählbar, gibt es offensichtlich Aufzählung
+\[
+  \varphi_1,\varphi_2,\varphi_3,\dots \quad\text{von AL.}
+\]
+
+Wir konstruieren Folge von Limit-erfüllbaren Formelmengen
+\[
+  \Gamma = \Gamma_0 \subseteq \Gamma_1 \subseteq \Gamma_2 \subseteq \dots
+\]
+
+wie folgt: im $\Gamma_{i+1}$ zu definieren, beobachte zunächst
+$\Gamma_i\cup\set{\varphi_{i+1}}$ oder $\Gamma_i\cup\set{\NOT\varphi_{i+1}}$
+ist Limit-erfüllbar.
+
+\textbf{Beweis:} Nimm im Gegenteil an, dass es endliche
+$\Delta,\Delta'\subseteq\Gamma_i$, so dass $\Delta\cup\set{\varphi_{i+1}}$ und
+$\Delta'\cup\set{\NOT\varphi_{i+1}}$ unerfüllbar. Dann ist
+$\Delta\cup\Delta'\subseteq\Gamma_i$ unerfüllbar, im Widerspruch zur
+Limit-Erfüllbarkeit von $\Gamma_i$.
+
+Setze
+\[
+  \Gamma_{i+1} = \begin{cases}
+    \Gamma_i \cup \set{\varphi_{i+1}} \quad\text{wenn $\Gamma_i\cup\set{\varphi_{i+1}}$ Limit-erfüllbar} \\
+    \Gamma_i \cup \set{\varphi_{i+1}} \quad\text{sonst.} \\
+  \end{cases}
+\]
+
+\textbf{Behauptung:} Angenommen, das ist nicht der Fall. Dann gibt es endliches
+$\Delta\subseteq\Gamma_\omega$, das unerfüllbar ist. Da $\Delta$ endlich, gibt
+es $i\geq 0$ mit $\Delta\subseteq\Gamma_i$, im Widerspruch zur
+Limit-Erfüllbarkeit von $\Gamma_i$.
+
+Definiere Belegung V wie folgt:
+\[
+  V(x) = \begin{cases}
+    1 \quad\text{wenn $x \in \Gamma_\omega$}\\
+    0 \quad\text{sonst}
+  \end{cases}
+\]
+
+Wie zeigen, dass $V\models\Gamma_\omega$, also auch $V\models\Gamma_\omega$, damit $\Gamma$ erfüllbar.
+Per Induktion über die Struktur von $\varphi$:
+\[
+  V \models \varphi\ \text{gdw.}\ \varphi \in \Gamma_\omega\ \text{für alle}\ \varphi \in AL
+\]
+
+\begin{enumerate}
+  \item $\varphi$ ist Variable.\par
+  Folgt aus Definition von V.
+  
+  \item $\varphi \not= \psi$.\par
+  Dann $V\models\varphi$, gdw. $V\not\models\psi$ gdw. $\psi\not\in\Gamma_\omega$ gdw. $\varphi\in\Gamma_\omega$.
+  
+  \item $\varphi = \psi\AND\vartheta$.\par
+  \begin{itemize}
+    \item[\enquote{$\Rightarrow$}]
+      $V\models\varphi \IMPL V\models\psi$ und $V\models\vartheta$\\
+      $V\models\varphi \IMPL \psi\in\Gamma_\omega$ und $\vartheta\in\Gamma_\omega$
+                                                    
+    Nach Konstruktion gilt $\psi\AND\vartheta\in\Gamma_\omega$ oder
+    $\NOT(\psi \AND \vartheta) \in \Gamma_\omega$. Nun ist aber
+    $\set{\psi, \vartheta, \NOT(\psi \AND \vartheta)}$
+    unerfüllbar (im Widerspruch zu (*)), also $\psi\AND\vartheta\in\Gamma_\omega$.
+    
+    \item[\enquote{$\Leftarrow$}]
+    Wenn $\psi\AND\vartheta\in\Gamma_\omega$, dann $\psi,\vartheta\in\Gamma_\omega$
+    (sonst $\NOT\psi\in\Gamma_\omega$ und dann wäre
+    $\set{\psi\AND\vartheta, \NOT\psi}$ unerfüllbar, ebenso für $\vartheta$).
+    Nach IV $V\models\psi$ und $V\models\vartheta$, also $V\models\psi\AND\vartheta$.
+    \qed
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Anwendung: 4-Färbbarkeit}
+
+\begin{description}
+  \item[\enquote{$\Leftarrow$}] ist trivial.
+  \item[\enquote{$\Rightarrow$}] Sei $G=(V,E)$ Graph, für den jeder endliche
+  Teilgraph 4-färbbar ist.
+
+  Definiere Formelmenge:
+  \[
+    \Gamma = \set{x_{v_1} \OR x_{v_2} \OR x_{v_3} \OR x_{v_4} \mid v \in V}
+      \cup \set{\ANDop_{i\in\set{1,2,3,4}} \NOT (x_{v_i} \AND x_{v_i'}) \mid (v,v')\in E }
+  \]
+
+  Wegen des 4-Farben-Satzes auf endlichen Graphen ist jede endliche Teilmenge
+  von $\Gamma$ erfüllbar. Wegen Kompaktheit ist $\Gamma$ erfüllbar, also ist
+  $(V,E)$ 4-färbbar.
+  \qed
+\end{description}
+
