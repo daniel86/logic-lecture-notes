@@ -1,3 +1,65 @@
 \section{VL vom 11. November 2010}
 
+\subsection{Resolutionssatz Einheitsresolution}
 
+\begin{description}
+  \item[\enquote{$\Leftarrow$}]
+  Wie im Resolutionssatz, denn es gilt $\ERes^*(M)\EQUIV M$.
+  
+  \item[\enquote{$\Rightarrow$}]
+  Wir verwenden die Korrektheit unseres Polyzeit-Algorithmus für Erfüllbarkeit
+  von Horn-Formeln. Setze in Analogie zu diesem Algorithmus:
+  
+  \begin{align}
+    V^0     &:= \set{x| M(\varphi) \text{enthält} \set{x}} \\
+    V^{i+1} &:= V^i \cup \set{x| \exists x_1,\dots,x_k \in V\ \text{mit}\ \set{\NOT x_1,\dots,\NOT x_k,x} \in M(\varphi)} \\
+    V^*     &:= \bigcup_{i\geq 0} V^i \\
+  \end{align}
+  
+  Mit der Korrektheit des Polyzeit-Algorithmus gilt
+  \begin{itemize}
+    \item[($*$)] $\varphi$ unerfüllbar gdw. es $x_1,\dots,x_k \in V^*$ gibt, mit
+    $\set{\NOT x_1,\dots,\NOT x_k,x}\in M(\varphi)$.
+  \end{itemize}
+  
+  Wir zeigen
+  \begin{itemize}
+    \item[($**$)] $x\in V^* \Rightarrow \set{x} \in \ERes^*(M(\varphi))$,
+  \end{itemize}
+  genauer gesagt: $x\in V' \Rightarrow \set{x} \in \ERes^*(M(\varphi))$ für
+  alle $i\geq 0$.
+
+  
+  \begin{description}
+    \item[IA] Trivial nach Definition $V^0$ und wegen $M(\varphi) \subseteq \ERes^*(M(\varphi))$
+    \item[IS] Sei $x \in V^{i+1}$. Wenn $x\in V^i$ verwende IA.
+    
+    Sonst gibt es $x_1,\dots,x_k \in V^i$ mit $\set{\NOT x_1,\dots,\NOT x_k,x} \in M(\varphi)$.
+    Wegen folgen der Ableitung von $\set{x}$ mittels Einheitsresolution gilt $\set{x}\in \ERes^*(M(\varphi))$.
+    \begin{verbatim}
+      \set{\NOT x_1,\dots,x_k,x}   \set{x_1}   \set{x_k}
+                \                   /           /
+              \set{\NOT x_2,\dots,x_k,x}       /
+                                 .            /
+                                  .          /
+                                   .        /
+                                    \set{x}
+    \end{verbatim}
+    
+    Sei $\varphi$ unerfüllbar. Mit ($*$) und ($**$) gibt es
+    $\set{\NOT x_1,\dots,\NOT x_k}\in M(\varphi)$ mit
+    $\set{x_1},\dots,\set{x_k}\in\Res^*(M(\varphi))$.
+    Folgende Ableitung mittels Einheitsresolution zeigt
+    $\square\in\ERes^*(M(\varphi))$.
+    \begin{verbatim}
+      \set{\NOT x_1,\dots,x_k}   \set{x_1}   \set{x_k}
+                \                 /           /
+              \set{\NOT x_2,\dots,x_k}       /
+                                 .          /
+                                  .        /
+                                   .      /
+                                   \square
+    \end{verbatim}
+    \qed
+  \end{description}
+\end{description}
