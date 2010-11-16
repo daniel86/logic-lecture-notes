@@ -3,17 +3,20 @@
 \subsection{Strukturen}
 \subsubsection{Block world}
 
-% TODO: mit tikzpicture, wie macht man kantenbeschriftung ?
-\begin{verbatim}
-bb - Block B
-rb - Block R
-gb - Block G
-
-bb (neben)-> rb
-rb (neben)-> bb
-rb (unter)-> gb
-gb (auf)-> rb
-\end{verbatim}
+\begin{center}
+  \begin{tikzpicture}[scale=2]
+    \node (a) {bb};
+    \node [right=of a] (b) {rb};
+    \node [above=of b] (c) {gb};
+    \node [below=of a] (d) {Block B};
+    \node [below=of b] (e) {Block R};
+    \node [above=of c] (f) {Block G};
+    \draw [<->] (a) -- (b) node[below,pos=0.5] {neben};
+    \draw [<-] (c) -- (b) node[left,pos=0.5] {unter};
+    \draw [->] (c) to[in=45,out=-45] (b) node[right,pos=0.5] {auf};
+    \draw (a) -- (d) (b) -- (e) (c) -- (f);
+  \end{tikzpicture}
+\end{center}
 
 \subsubsection{Weiteres Beispiel}
 $(\mathbb{N}, <, P_1^{\mathfrak{A}}, P_2^{\mathfrak{A}}, \dots)$
@@ -82,16 +85,23 @@ Price^{\mathfrak{A}} &=& \{ 000, 01,0, 110 \}
 \subsection{Pr"adikatenlogik Semantik - Therme}
 Betrachte folgende Struktur $\mathfrak{A}$ mit un"aren Funktionssymbolen f,g und Konstante c:
 
-% TODO: mit tikzpicture
-\begin{verbatim}
-a1 (f)-> a1
-a4 (g)-> a4
-a1 (g)-> a2
-a2 (f)-> a3
-a3 (f,g) -> a4
-a4 (f)-> a1
-a2 (g)-> a4
-\end{verbatim}
+\begin{center}
+  \begin{tikzpicture}[scale=2]
+    \node (a) {$a_1$};
+    \node [xshift=4em,below=of a] (b) {$a_2$};
+    \node [xshift=-4em,below=of a] (c) {$a_4$};
+    \node [xshift=-4em,below=of b] (d) {$a_3$};
+    % TODO: kante zu sich selbst
+    \draw [->] (a) -- (a) node[above] {f};
+    \draw [->] (c) -- (c) node[left] {g};
+
+    \draw [->] (a) -- (b) node[right,pos=0.5] {g};
+    \draw [->] (b) -- (d) node[below,pos=0.5] {f};
+    \draw [->] (d) -- (c) node[below,pos=0.5] {f,g};
+    \draw [->] (c) -- (a) node[left,pos=0.5] {f};
+    \draw [->] (b) -- (c) node[below,pos=0.5] {g};
+  \end{tikzpicture}
+\end{center}
 
 Betrachte:
 \begin{itemize}
