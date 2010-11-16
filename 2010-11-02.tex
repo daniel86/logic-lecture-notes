@@ -1,0 +1,49 @@
+\section{VL vom 02. November 2010}
+
+\subsection{Erfüllbarkeit ist in NP}
+
+Sei $\phi$ Eingabeformel und sein $n = |\Var(\phi)|$.
+
+Eine nicht-deterministische Touringmaschine kann mit $n$ nicht-determinischen
+Übergängen eine Belegung für $\phi$ auf das Band schreiben. Danach prüft sie
+deterministisch in Polynomialzeit, ob die geschriebene Belegung $\phi$ erfüllt.
+
+Sie Aktzeptiert, wenn das der Fall ist und verwirft sonst. Offenbar löst die
+Maschnine das Erfüllbarkeitsproblem in Polynomialzeit.
+
+Erfüllbarkeit NP-hart $\leadsto$ VL Komplexitätstheorie (Cook's Theorem).
+
+Gültigkeit: Reduktion auf Unerfüllbakeit 
+
+\subsection{Korrektheit + Polynomialzeit für Horn-Formeln}
+
+Offensichtlich terminiert der Algorithmus auf jeder Eingabe $\phi$ nach max.
+$|\Var(\phi)|$ durchläufen der while-Schleife, also in Polynomialzeit.
+
+Angenommen, der Algorithmus antowrtet \enquote{erfüllbar}. Dann gilt für die
+konstruierte Menge $V$:
+
+\begin{enumerate}
+  \item Wenn $x_1\AND\dots\AND x_n \IMPL x$ Konjunkt von $\phi$ und $\set{x_1,\dots,x_n} \subseteq V$, dann $x \in V$.
+  \item Wenn $x_1\AND\dots\AND x_n \IMPL 0$ Konjunkt von $\phi$, dann $\set{x_1,\dots,x_n} \not\subseteq V$.
+\end{enumerate}
+
+Also erfüllt $V$ (betrachtet als Belegung) $\phi$ und $\phi$ ist erfüllbar.
+
+Angenommen, $\phi$ ist erfüllbar. Man zeigt leicht per Induktion über die Anzahl der Schleifendurchläufe:
+
+\begin{itemize}
+  \item[$*$] Wenn $x \in V$, dann $\hat{V}=1$ für alle Modell $\hat{V}$ von $\phi$.
+\end{itemize}
+
+Sei $x_1\AND\dots\AND x_n \IMPL 0$ Konjunkt von $\phi$. Es gilt
+$\set{x_1,\dots,x_n} \not\subseteq V$, denn $\phi$ besitzt Modell $\hat{V}$ und
+wenn $\set{x_1,\dots,x_n}\subseteq V$ ist mit $(*)$ auch
+$\set{x_1,\dots,x_n} \subseteq \hat{V}$, im Widerspruch dazu dass $\hat{V}$ Modell
+von $\phi$ ist. \qed
+
+\subsubsection{Beispiel}
+
+\[
+  V=\set{\text{Regen}, \text{Schnee}} \cup \set{\text{Niederschlag}, \underline{\text{Temp}>0}, \underline{\text{Temp}\leq 0}}
+\]

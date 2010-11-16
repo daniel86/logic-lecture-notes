@@ -5,8 +5,10 @@
 \usepackage[sc,osf]{mathpazo}
 \usepackage[german=guillemets]{csquotes}
 \usepackage[fleqn]{amsmath}
-\usepackage{amssymb,parskip,xspace,textcomp}
+\usepackage{amssymb,parskip,xspace,textcomp,latexsym,stmaryrd,enumitem}
 \usepackage[margin={3cm,2cm}]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
 
 \DeclareMathOperator{\AND}{\wedge}
 \DeclareMathOperator{\OR}{\vee}
@@ -17,6 +19,10 @@
 \DeclareMathOperator*{\ORop}{\bigvee}
 \DeclareMathOperator{\UNION}{\cup}
 \DeclareMathOperator{\SUBSET}{\subset}
+
+\DeclareMathOperator{\Var}{\text{\textsf{Var}}}
+\DeclareMathOperator{\Res}{\text{\textsf{Res}}}
+\DeclareMathOperator{\ERes}{\text{\textsf{ERes}}}
 
 \def\roem#1{\ensuremath{\text{#1}}\xspace}
 \def\set#1{\ensuremath{\left\{#1\right\}}}
@@ -30,7 +36,9 @@
 
 \input{2010-10-26}
 \input{2010-10-28}
+\input{2010-11-02}
 \input{2010-11-09}
+\input{2010-11-11}
 
 \end{document}
 

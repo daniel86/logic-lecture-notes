@@ -1,97 +1,133 @@
-\section{VL vom 09.~November 2010}
+\section{VL vom 09. November 2010}
 
-\subsection{Beweis des Resolutionslemmas}
+\subsection{Beweis Resolutionslemma}
 
 \begin{itemize}
-\item $V \models M \UNION \{C\} \rightarrow V \models  M$ trivial \\
-\item Es gelte $V \models M$. Ferner sei $C = (C_1\ \{l\}) \UNION (C_2\ \{\overline{l}\})$ mit $C_1,C_2 \in M$. \\ Unterscheide 2 F"alle:
+  \item $V \models  M \cup \set{C} \Rightarrow V \models  M$ trivial.
+  \item Es gelte $V\models M$. Ferner sei $C=(C_1\backslash \set{\ell}) \cup
+  (C_2\backslash \set{\overline{\ell}})$ mit $C_1,C_2 \in M$. Unterscheide zwei
+  Fälle:
+  \begin{itemize}
+    \item $V(\ell) = 1$. Wegen $V\models C_2$ dann auch $V\models C_2\backslash \set{\overline{\ell}}$.
+    \item $V(\ell) = 0$. Wegen $V\models C_1$ dann auch $V\models C_1\backslash \set{\overline{\ell}}$.
+  \end{itemize}
+  In beiden Fällen also $V\models C$.\qed
+\end{itemize}
+
+\subsubsection{Beispiel-Resolution}
+
+\begin{align}
+  M(\varphi) &= \set{\set{x_1}, \set{\NOT x_1, x_2}, \set{\NOT x_2, x_3}, \set{\NOT x_3}} = M \\
+  \Res^0(M)   &= M \\
+  \Res^1(M)   &= \Res^0(M) \cup \set{\set{x_2}, \set{\NOT x_1, x_3}, \set{\NOT x_2}} \\
+  \Res^2(M)   &= \Res^1(M) \cup \set{\set{x_3}, \set{\NOT x_1}, \square} \\
+  \Res^3(M)   &= \Res^2(M) = \Res^*(M)
+\end{align}
+
+\subsection{Beweis Resolutionssatz}
+
 \begin{itemize}
-    \item $V(l) = 1$ Wegen $V \models C_2$ dann auch $V \models C_2\ \{\overline{l}\}$ \\
-    \item $V(l) = 0$ Wegen $V \models C_1$ dann auch $V \models C_1\ \{l\}$ \\
+  \item[$\Leftarrow$] \textbf{Korrektheit}\par
+  Da $\square \in \Res^*(M)$, ist $\Res^*(M)$ unerfüllbar. Es genügt also zu zeigen, dass $\Res^*(M)\EQUIV M$.
+  Mittels Resolutionslemma und per Induktion über $i$ zeigt man leicht, dass $M\EQUIV \Res^i(M) \forall i \geq 0$.
+  Da sich über den endlich vielen Literalen in $M$ nur endlich viele Klauseln bilden lassen, ist $\Res^*(M)$ endlich, also $\Res^*(M) = \Res^i(M)$ für ein $i\geq 0$, damit $M\EQUIV \Res^*(M)$.
+  
+  \item[$\Rightarrow$] \textbf{Vollständigkeit}\par
+  Wir zeigen
+  \[
+    M\ \text{unerfüllbar} \IMPL \square \in \Res^*(M)
+  \]
+  per Induktion über $|\Var(M)|$.
+  \begin{description}
+    \item[IA] $\Var(M) \not= \emptyset$. Dann $M=\emptyset$ oder $M=\set{\square}$.
+    Da $\emptyset$ erfüllbar, muss $M=\set{\square}$ sein, also $\square\in M \subseteq \Res^*(M)$.
+    
+    \item[IS] Wähle $x\in \Var(M)$, konstruiere zwei Klauselmengen:
+    \begin{align}
+      K^+ &:= \set{C \backslash \set{\NOT x} | x \not\in C \in M} \\
+      K^- &:= \set{C \backslash \set{x} | \NOT x \not\in C \in M} 
+    \end{align}
+    Intuitiv entspricht $K^+$ dem Fall $V(x) = 1$: alle Klauseln $C$ mit $x \in C$
+    sind erfüllt und wurden gestrichen, aus den verbliebenen Klauseln kann
+    $\NOT x$ gestrichen werden (wenn vorhanden), denn $\NOT x$ kann die Klausel
+    nicht wahr machen.
+    
+    Wir zeigen:
+    \begin{enumerate}
+      \item $K^+$ und $K^-$ sind unerfüllbar
+      \item $\square \in \Res^*(M)$ oder $\set{\NOT x} \in \Res^*(M)$
+      \item $\square \in \Res^*(M)$ oder $\set{x} \in \Res^*(M)$
+    \end{enumerate}
+    
+    \item[(1)] Angenommen, $K^+$ ist erfüllbar und $V\models K^+$.
+    Erweitere $V$ durch $V(x)=1$. Man prüft leicht, dass $V\models M$. $\lightning$
+    
+    Unerfüllbarkeit $K^-$ analog.
+    
+    \item[(2)] Weil $K^+$ unerfüllbar liefert IV $\square\in\Res^*(K^+)$.
+    Also gibt es Klauseln $C_1,\dots,C_m$, so dass $C_m=\square$ und für $1\leq i\leq m$ gilt
+    \begin{enumerate}
+      \item $C_i \in K^+$ oder
+      \item $C_i$ ist Resolvente von $C_j,C_k$ für je gewisse $j,k < i$.
+    \end{enumerate}
+
+    \textbf{Fall 1:} alle Klauseln $C_i$ der Form (a) sind auch in $M$ (in keiner der
+    \enquote{Originalklauseln} kam $\NOT x$ vor). Dann prüft man leicht, dass
+    $C_1,\dots,C_m \in\Res^*(M)$, also $\square\in\Res^*(M)$.
+    
+    \textbf{Fall 2:} Für mind. ein $C_i$ der Form (a) ist $C_i\cup\set{\NOT x}\in M$.
+    Wir erhalten duch Wiedereinfügen von $\NOT x$ eine Folge von Klauseln
+    $C'_1,\dots,C'_m \in \Res^*(M)$, die beweist, dass $\set{\NOT x}\in\Res^*(M)$.
+    
+    \begin{center}
+      \begin{tikzpicture}
+        \node (j) at (-1,1) {$C_j$};
+        \node (k) at (1,1) {$C_k$};
+        \node (i) at (0,0) {$C_i$};
+        \draw (j)--(i) (k)--(i);
+        
+        \node at (3,0.5) {$\Rightarrow$};
+        \node (j) at (5,1) {$C_j\cup\set{\NOT x}$};
+        \node (k) at (9,1) {$C_k\cup\set{\NOT x}$};
+        \node (i) at (7,0) {$C_i\cup\set{\NOT x}$};
+        \draw (j)--(i) (k)--(i);
+      \end{tikzpicture}
+    \end{center}
+    \item[(3)] Analog zu (2) unter Verwendung von $K^-$.
+  \end{description}
+
+  Aus (2) und (3) folgt, dass $\square\in\Res^*(M)$ oder $\set{x},\set{\NOT x}\in\Res^*(M)$. Mit
+  \begin{center}
+    \begin{tikzpicture}
+      \node (j) at (-1,1) {$\set{\NOT x}$};
+      \node (k) at (1,1) {$\set{x}$};
+      \node (i) at (0,0) {$\square$};
+      \draw (j)--(i) (k)--(i);
+    \end{tikzpicture}
+  \end{center}
+  dass auch $\square\in\Res^*(M)$.\qed
 \end{itemize}
-In beiden F"allen also $V \models C$ .
-\end{itemize}
 
-\subsubsection{Beispiel Resolution}
+\subsection{Beispiel: Einheitsresolvente}
 
-\begin{eqnarray*}
-M(\varphi) &=& \{ \{x_1\}, \{\neg x_1, x_2\}, \{\neg x_2, x_3\}, \{\neg x_3\} \} = M \\
-Res^0(M) &=& M \\
-Res^1(M) &=& Res^0(M) \UNION \{ \{x_2\}, \{\neg x_1, x_3\}, \{\neg x_2\} \} \\
-Res^2(M) &=& Res^1(M) \UNION \{ \{x_3\}, \{\neg x_1\}, \square \} \\
-Res^3(M) &=& Res^2(M) = Res^*(M)
-\end{eqnarray*}
-
-\subsubsection{Resolutionssatz}
-
-\paragraph[]{'<=' Korrektheit}
-Da $\square \in Res^*(M)$, ist $Res^*(M)$ unerfüllbar. Es genügt also, zu zeigen, dass $Res^*(M) \equiv M$. Mittels Resolutionslemma und per Induktion über $i$ zeigt man leicht, dass $M \equiv Res^i(M)$ für alle $i \geq 0$. Da sich über den endlichg vielen Literalen in M nun endlich viele Klausen bilden lassen, ist $Res^*(M)$ endlich, also $Res^*(M) = Res^i(M)$ für ein $i >= 0$; damit $M \equiv Res^*(M)$.
-
-\paragraph[]{'=>' Vollständigkeit}
-Wir zeigen: $M \text{ unerfüllbar} \rightarrow \square \in M$.
-per Induktion über $|Var(M)|$.
-
-\paragraph[]{(IA)}
-$Var(M) = \emptyset$. Dann $M=\emptyset$ oder $M=\{ \square \}$. Da $\emptyset$ erfüllbar, muss $M=\{ \square \}$ sein, also $\square \in M \SUBSET Res^*(M)$.
-
-\paragraph[]{(IS)}
-Wähle $x \in Var(M)$, konstruiere zwei Klauselmengen:
-\begin{itemize}
-\item $K^+ = \{C\ \{\neg x\} | x \not\in C \in M \}$ \\
-\item $K^- = \{C\ \{x\} | \neg x \not\in C \in M \}$
-\end{itemize}
-Intuitiv entspricht $K^+$ dem Fall $V(x)=1$: alle Klauseln C mit $x \in C$ sind erfüllt und werden gestrichen, aus den verschiedenen Klauseln kann $\neg x$ gestrichen werden (wenn vorhanden), denn $\neg x$ kann die Klausel nicht wahr machen.
-
-Wir zeigen:
-\begin{itemize}
-\item 1. $K^+ und K^-$ sind unerfüllbar \\
-\item 2. $\square \in Res^*(M)$ oder $\{\neg x\} \in Res^*(M)$ \\
-\item 3. $\square \in Res^*(M)$ oder $\{ x\} \in Res^*(M)$
-\end{itemize}
-Also:
-\begin{itemize}
-\item (1) Angenommen, $K^+$ ist erf"ullbar und $V \models K^+$. Erweitere V durch $V(x)=1$. Man pr"uft leicht, dass $V \models M$. \textbf{Widerspruch} Unerf"ullbarkeit $K^-$ analog.
-\item (2) Weil $K^+$ unerf"ullbar liefert (IV) $\square \in Res^*(K^+)$. Also gibt es Klauseln $C_1,\dots,C_m$, so dass $C_m = \square$ und f"ur $1 \leq 0 \leq m$ gilt.
-\begin{itemize}
-    \item (a) $C_i \in K^+$ oder
-    \item (b) $C_i$ ist Resolvente von $C_i, C_k$, f"ur gewisse $j, k < i$.
-\begin{itemize}
-        \item Fall 1: alle Klauseln $C_i$ der Form (a) sind auch in $M$ (in keiner der 'Originalklauseln' kam $\neg x$ vor). Dann pr"uft man leicht, dass $C_1,\dots,C_m \in Res^*(M)$, also $\square \in Res^*(M)$. \\
-        \item Fall 2: F"ur mindestens ein $C_i$ der Form (a) ist $C_i \UNION \{\neg x\} \in M$. Wir erhalten durch Wiedereinf"ugen von $\neg x$ eine Folge von Klauseln:
-$C^{'}_1,\dots,C^{'}_m \in Res^*(M)$.
-die beweist, dass
-\begin{verbatim}
-C1  Ck      Ci \UNION {\neg x}    Ck \UNION \{\neg x\}
- \  /   =>                 \       /
-  Ci                      Ci \UNION {\neg x}
-\end{verbatim}
-\end{itemize}
-\end{itemize}
-\item (3) Analog zu (2) unter Verwendung von $K^-$.
-\end{itemize}
-Aus (2) und (3) folgt, dass $\square \in Res^*(M)$ oder $\{x\}, \{\neg x\} \in Res^*(M)$. Mit
-\begin{verbatim}
-\neg x  x     
-    \  /   
-    \square
-\end{verbatim}
-das auch $\square \in Res^*(M)$. q.e.d.
-
-\subsection{Einheitsresolvente}
-\begin{verbatim}
-            1                         2     3     4            5
-{\neg x_1, \neg x_2, \neg x_3, x_4} {x_1} {x_2} {x_3} {\neg x_3, \neg x_4}
-                    6
-* 1/2 -> {\neg x_2, \neg x_3, x_4}
-                7
-* 6/3 -> {\neg x_3, x_4}
-           8
-* 7/4 -> {x_4}
-           9
-* 8/4 -> {\neg x_3}
-           10
-* 9/4 -> {\square}
-\end{verbatim}
-
-
+\begin{center}
+  \begin{tikzpicture}
+    \node             (a) {$\set{\NOT x_1, \NOT x_2, \NOT x_3, x_4}$};
+    \node[right=of a] (b) {$\set{x_1}$};
+    \node[right=of b] (c) {$\set{x_2}$};
+    \node[right=of c] (d) {$\set{x_3}$};
+    \node[right=of d] (e) {$\set{\NOT x_3, \NOT x_4}$};
+    \node[xshift=4em,below=of a] (f) {$\set{\NOT x_2, \NOT x_3, x_4}$};
+    \node[xshift=5em,below=of f] (g) {$\set{\NOT x_3, x_4}$};
+    \node[xshift=5em,below=of g] (h) {$\set{x_4}$};
+    \node[xshift=5em,below=of h] (i) {$\set{\NOT x_3}$};
+    \node[xshift=6em,below=of i] (j) {$\square$};
+    
+    \draw (a)--(f) (b)--(f)
+      (c)--(g) (f)--(g)
+      (d)--(h) (g)--(h)
+      (e)--(i) (h)--(i)
+      (d) to[in=45,out=-45] (j) (i)--(j);
+  \end{tikzpicture}
+\end{center}
 
