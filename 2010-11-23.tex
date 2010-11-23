@@ -1,0 +1,36 @@
+\section{VL vom 23.~November 2010}
+
+\subsection{Beispiele zur Semantik von FO}
+
+\begin{itemize}
+  \item Beispiel 1:\par
+  $\mathfrak{A}$ (Blocksworld-Graph hier einfügen)
+  
+  Zuweisung $\beta$: $\beta(x) = bb \qquad \beta(y) = gb \qquad \beta(z) = gb$
+  % Absicht, da Beispielbelegung: \beta(y) = \beta(z)
+  
+  \begin{align}
+    \mathfrak{A}, \beta &\models \exists x.(R(x) \AND \forall y.(\text{auf}(y,x) \IMPL G(y))) && \text{Satz} \\
+    \mathfrak{A}, \beta &\models \exists z.(\text{neben}(b_1,z) \AND \text{unter}(z,b_2))     && \text{Satz} \\
+    \mathfrak{A}, \beta &\models \exists z.(\text{neben}(x,z) \AND \text{unter}(z,y))         && \text{kein Satz} \\
+    \mathfrak{A}, \beta &\models x \not= b_2                                                  && \text{kein Satz} \\
+    \mathfrak{A}, \beta &\models \forall x.(G(x) \OR B(x) \OR x = \text{lieblingsblock})      && \text{Satz}
+  \end{align}
+  
+  \item Beispiel 2:\par
+  $\mathfrak{N} = (\mathbb{N}, +, \cdot, 0, 1)$
+  
+  Sei $\beta$ beliebig. Dann gelten folgende Sätze:
+  \begin{align}
+    \mathfrak{N}, \beta &\models \forall x \forall x.(x+y=y+x) \\
+                        & \qquad\text{(zur Vereinfachung: $a+b = +(a,b)$)} \notag\\
+    \mathfrak{N}, \beta &\models \forall x.(\text{Prim}(x) \IMPL \exists y.(y>x \AND \text{Prim}(y))) \\
+                        & \qquad\text{wobei $\text{Prim}(x) = \forall y,z.(x=y\cdot z \IMPL (y=1 \OR z=1))$} \notag\\
+                        & \qquad\text{und $y>x = \exists z.(z\not=0 \AND x+z = y)$} \notag\\
+    \mathfrak{N}, \beta &\stackrel{?}{\models} \forall x.(\text{Prim}(y) \AND \text{Prim}(y+z)) \\
+                        & \qquad\text{wobei $y+z = (y+1)+1$} \notag\\
+                        & \qquad\text{\enquote{Gibt es unendlich viele Primzahlzwillinge?}}\notag\\
+                        & \qquad\text{(offenes Problem der Zahlentheorie)}\notag
+  \end{align}
+\end{itemize}
+
