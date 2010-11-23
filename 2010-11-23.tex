@@ -34,3 +34,65 @@
   \end{align}
 \end{itemize}
 
+\subsection{Isomorphielemma}
+
+\subsubsection{Beispiel}
+
+$c_1, c_2  \in F^0(\tau) \qquad f \in F^1(\tau) \qquad R \in R^2(\tau)$
+
+\begin{verbatim}
+  Graph von Bernd tikzen
+\end{verbatim}
+
+\subsubsection{Beweis}
+
+Wegen des Koinzidenzlemmas genügt es, zu zeigen:
+
+Wenn $\mathcal{I}_\mathfrak{A} = (\mathfrak{A},\beta)$ und $\mathcal{I}_\mathfrak{B} = (\mathfrak{B}, \beta)$ Interpretationen,
+so dass $\beta'(x) = \pi(\beta(x))$ für alle $x\in VAR$, dann
+
+\begin{itemize}
+  \item[$(*)$] $\mathcal{I}_\mathfrak{A} \models \varphi$ für alle $\varphi \in FO(\tau)$
+\end{itemize}
+
+Man zeigt leicht per Induktion über die Struktur über die Struktur von t:
+
+\begin{itemize}
+  \item[$(**)$] $\beta'(t) = \pi(\beta(t))$ für alle $t \in T(\tau)$
+\end{itemize}
+
+Beweis von $(*)$ per Induktion über die Struktur von $\varphi$
+
+\begin{itemize}
+  \item \textbf{Induktionsanfang}
+  \begin{enumerate}
+    \item $\mathcal{I}_\mathfrak{A} \models t_1=t_2$\\
+      gdw. $\beta(t_1) = \beta(t_2)$ (Semantik \enquote{=})\\
+      gdw. $\pi(\beta(t_1)) = \pi(\beta(t_2))$ ($\pi$ injektiv)\\
+      gdw. $\beta'(t_1) = \beta'(t_2)$ ($(**)$)\\
+      gdw. $\mathcal{I}_\mathfrak{B} \models t_1=t_2$
+    
+    \item $\mathcal{I}_\mathfrak{A} \models P(t_1,\dots,t_k)$ \\
+      gdw. $(\beta(t_1),\dots,\beta(t_k)) \in P^\mathfrak{A}$ \\
+      gdw. $(\pi(\beta(t_1)),\dots,\pi(\beta(t_k))) \in P^\mathfrak{B}$ ($\pi$ isom.) \\
+      gdw. $(\beta'(t_1),\dots,\beta'(t_k)) \in P^\mathfrak{B}$ \\
+      gdw. $\mathcal{I}_\mathfrak{B} \models P(t_1,\dots,t_2)$
+  \end{enumerate}
+  
+  \item \textbf{Induktionsschritt}
+  \begin{enumerate}
+    \item Fälle $\varphi = \NOT \psi$, $\varphi = \psi_1 \AND \psi_2$, $\varphi = \psi_1 \OR \psi_2$
+      (Übung)
+      
+    \item $\mathcal{I}_\mathfrak{A} \models \exists x.\psi$ \\
+      gdw. $(\mathfrak{A}, \beta[x/a]) \models \psi$ für ein $a \in A$\\
+      gdw. $(B, \beta'[x/\pi(a)]) \models \psi$ für ein $a \in A$ (IV)\\
+      gdw. $(B, \beta'[x/b]) \models \psi$ für ein $b \in B$ ($\pi$ surj.)\\
+      gdw. $\mathcal{I}_B \models \exists x.\psi$
+      
+    \item Fall $\varphi = \forall x.\psi$ analog.
+  \end{enumerate}
+\end{itemize}
+\qed
+
+
