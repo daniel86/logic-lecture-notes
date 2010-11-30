@@ -28,6 +28,48 @@ Indexfolge 2,3 ist Lösung:
   Baum von Carsten TikZen
 \end{verbatim}
 
-\subsubsection{Unentscheidbarkeit II}
+\subsubsection{Beweis des Lemmas Unentscheidbarkeit}
+
+\begin{description}
+  \item[\enquote{$\Leftarrow$}]
+  Sei $\varphi_F$ fültig. Betrachte folgende Struktur:
+  \begin{align*}
+    \mathfrak{A} &= (A, c_\epsilon, f_0, f_1, P) \qquad\text{mit} \\
+    A &= \set{0,1}^*\\
+    c_\epsilon^{\mathfrak{A}} &= \epsilon\\
+    f_0^{\mathfrak{A}}(w) &= w \cdot 0\\
+    f_1^{\mathfrak{A}}(w) &= w \cdot 1\\
+    P &= \set{(u,v) \mid \text{es gibt $i_1,\dots,i_l$ mit $u=u_{i_1}\cdots u_{i_l}$ und $v=v_{i_1}\cdots v_{i_l}$}}
+  \end{align*}
+  
+  Es gilt
+  \begin{enumerate}
+    \item $\mathfrak{A} \models \varphi$ (nach Definition von $P$ und wegen $t_w(c_\epsilon)^{\mathfrak{A}}=w$ für alle $w\in\set{0,1}^*$)
+    \item $\mathfrak{A} \models \psi$: wenn $(u,v)\in P^{\mathfrak{A}}$, dann folgt mit Definition von $P$ auch $P(uu_i, vv_i)$ für $1\leq i\leq h$.
+    
+    Wegen $t_w^\mathfrak{A}(w') = w'w$ für alle $w,w'\in\set{0,1}^*$, also $P(t_{u_i}^\mathfrak{A}(u), t_{v_i}^\mathfrak{A}(v))$.
+
+    Wegen Gültigkeit von $\varphi_F$, also $\mathfrak{A} \models \exists x.P(x,x)$. Nach Definition von $P$ hat $F$ aleo eine Lösung.
+  \end{enumerate}
+  
+  \item[\enquote{$\Rightarrow$}]
+  Sei $i_1,\dots,i_l$ Lösung für $F$ und $\mathfrak{A} = (A, c, f_1, f_2, P)$ eine Struktur. Zu zeigen: $\mathfrak{A}\models\varphi_F$.
+  
+  Wenn $\mathfrak{A}\not\models \varphi\AND\psi$, gilt $\mathfrak{A}\models\varphi_F$. Es gelte $\mathfrak{A}\models\varphi\AND\psi$.
+  Definiere Abbildung $h : \set{0,1}^* \rightarrow A$:
+  \begin{align*}
+    h(\epsilon) &= c_\epsilon^\mathfrak{A}\\
+    h(w0) &= f_0^{\mathfrak{A}}(h(w))\\
+    h(w1) &= f_1^{\mathfrak{A}}(h(w))
+  \end{align*}
+  
+  Man sieht leicht, dass $h(w)=t_w(c_\epsilon)^\mathfrak{A}$ für alle $w\in\set{0,1}^*$.
+  
+  Wegen $\mathfrak{A} \models \varphi$, also $(h(u_{i_1}), h(v_{i_1}) \in P^{\mathfrak{A}}$.
+  
+  Wegen $\mathfrak{A} \models \psi$ können wir unduktiv schließen, dass $(h(u_{i_1}\cdots u_{i_r}), h(v_{i_1}\cdots v_{i_r}))\in P^{\mathfrak{A}}$ für $1\leq r\leq l$.
+  
+  Sei $u_{i_1}\cdots u_{i_r} = v_{i_1}\cdots v_{i_r} = w$. Es gilt also $(h(w),h(w)) \in P^{\mathfrak{A}}$, damit $\mathfrak{A} \models \exists x.P(x,x)$, also $\mathfrak{A}\models\varphi_F$.
+\end{description}
 
 
