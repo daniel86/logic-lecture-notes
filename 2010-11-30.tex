@@ -1,2 +1,33 @@
 \section{VL vom 30.~November 2010}
 
+\subsection{Beispiel PNF}
+
+\begin{align}
+  \varphi &= \NOT\forall x.(R(x,x) \AND \forall x.\exists y.R.(x,y)) && \text{(Fall 3)} \\
+    &\EQUIV \NOT\forall x.(R(x,x) \AND \forall z.\exists y.R.(z,y)) && \text{(Variablenumbenennung)} \\
+    &\EQUIV \NOT\forall x.\forall z.\exists y.(R(x,x) \AND R(z,y)) && \text{(Negation reinziehen)} \\
+    &\EQUIV \exists x.\exists z.\forall y. \NOT(R(x,x) \AND R(z,y))
+\end{align}
+
+\subsection{Postsches Korrespondenzproblem (PCP)}
+
+\[
+  F = \set{(0,1)_1, (1,10)_2, (01,1)_3}
+\]
+
+Indexfolge 2,3 ist Lösung:
+
+\begin{itemize}
+  \item linke Konkatenation:  $1|0 1$
+  \item rechte Konkatenation: $1 0|1$
+\end{itemize}
+
+\subsubsection{Unentscheidbarkeit}
+
+\begin{verbatim}
+  Baum von Carsten TikZen
+\end{verbatim}
+
+\subsubsection{Unentscheidbarkeit II}
+
+

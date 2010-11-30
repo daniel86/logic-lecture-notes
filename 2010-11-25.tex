@@ -84,12 +84,13 @@ Konsequenz:
 
 PNF, exemplarisch die erste Äquivalenz:
 
-\begin{itemize}
-  \item $\mathfrak{A}, \beta \models \varphi \OR \exists x.\psi$
-  \item gdw. $\mathfrak{A}, \beta \models \varphi$ oder es gibt $a\in A$ mit $\mathfrak{A}, \beta[x/a] \models \psi$
-  \item gdw. es gibt $a\in A$, so dass $\mathfrak{A}, \beta[x/a] \models \varphi$ oder $\mathfrak{A}, \beta[x/a] \models \psi$ (weil $x$ nicht frei in $\varphi$ vorkommt)
-  \item gdw. $\mathfrak{A}, \beta[x/a] \models \exists x.(\varphi \OR \psi)$
-\end{itemize}
+\begin{align}
+  \mathfrak{A}, \beta &\models \varphi \OR \exists x.\psi \\
+  \text{gdw.}\quad \mathfrak{A}, \beta &\models \varphi\ \text{oder es gibt}\ a\in A\ \text{mit}\ \mathfrak{A}, \beta[x/a] \models \psi \\
+  \text{gdw. es gibt $a\in A$, so dass}\ \mathfrak{A}, \beta[x/a] &\models \varphi\ \text{oder}\ \mathfrak{A}, \beta[x/a] \models \psi\\
+      & \qquad\qquad\text{(weil $x$ nicht frei in $\varphi$ vorkommt)} \\
+  \text{gdw.}\quad \mathfrak{A}, \beta[x/a] &\models \exists x.(\varphi \OR \psi)
+\end{align}
 
 Beweis per Induktion über die Struktur von $\varphi$.
 \begin{itemize}
@@ -103,12 +104,20 @@ Beweis per Induktion über die Struktur von $\varphi$.
     \item Sei $\varphi = \psi_1 \circ \psi_2$ mit $\circ\in\set{\AND,\OR}$
     Nach IV gibt es PNF-Formeln $\psi_1', \psi_2'$ mit $\psi_1 \EQUIV \psi_1'$
     und $\psi_2 \EQUIV \psi_2'$. Durch Variablenumbenennung erreichen wir, dass in
-      $\psi_1' = Q_1x_1 \cdots Q_nx_n. \vartheta_1$
-      $\psi_2' = Q_1'y_1 \cdots Q_m'y_m. \vartheta_2$
-    die $x_1,\dots,x_n, y_1,\dots,y_m$ paarweise verschieden und verschieden von allen freien Variablen in $\psi_1'$ und $\psi_2'$ sind
+    
+    \begin{align}
+      \psi_1' &= Q_1x_1 \cdots Q_nx_n. \vartheta_1 \\
+      \psi_2' &= Q_1'y_1 \cdots Q_m'y_m. \vartheta_2 \\
+    \end{align}
+    
+    die $x_1,\dots,x_n, y_1,\dots,y_m$ paarweise verschieden und verschieden von allen freien Variablen in $\psi_1'$ und $\psi_2'$ sind.
     
     Offenbar ist
-      $\varphi' = Q_1x_1\cdots Q_nx_n Q_1'y_1 \cdots Q_m'y_m .(\vartheta\circ\vartheta)$
+    
+    \begin{align}
+      \varphi' = Q_1x_1\cdots Q_nx_n Q_1'y_1 \cdots Q_m'y_m .(\vartheta\circ\vartheta)
+    \end{align}
+    
     in PNF. Da $y_1,\dots,y_m$ nicht in $\psi_1'$ vorkommen und $x_1,\dots,x_n$ nicht in $\psi_2'$, liefern die Äquivalenzen $\varphi \EQUIV \varphi'$
     
     \item Sei $\varphi = Q x.\psi$ mit $Q \in\set{\exists, \forall}$.
