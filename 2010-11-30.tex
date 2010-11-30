@@ -72,4 +72,27 @@ Indexfolge 2,3 ist Lösung:
   Sei $u_{i_1}\cdots u_{i_r} = v_{i_1}\cdots v_{i_r} = w$. Es gilt also $(h(w),h(w)) \in P^{\mathfrak{A}}$, damit $\mathfrak{A} \models \exists x.P(x,x)$, also $\mathfrak{A}\models\varphi_F$.
 \end{description}
 
+\subsection{Beweis Theorem}
 
+Wir nehmen o.B.d.A. an, dass $\varphi$ ein Satz ist (universeller Abschluss).
+
+\begin{description}
+  \item[\enquote{$\Leftarrow$}]
+  Angenommen, $\varphi$ ist nicht gültig. Dann gibt es Struktur $\mathfrak{A}$ mit $\mathfrak\not\models\varphi$.
+  Erweitere $\mathfrak{A}$ um $P^\mathfrak{A} = \set{(a,a)\mid a\in A}$.
+  Offensichtlich gilt $\mathfrak{A}\models\ANDop\Gamma_\tau$. Man zeigt leicht, dass $\mathfrak{A},\beta\models\psi$ gdw. $\mathfrak{A},\beta\models\psi[P_=/=]$ für alle $\psi\in FO(\tau)$ und Zuweisungen $\beta$. Wegen $\mathfrak{A}\not\models\varphi$, also $\mathfrak{A}\not\models\varphi[P_=/=]$, also $\mathfrak{A}\not\models\ANDop\Gamma_\tau \rightarrow \varphi[P_=/=]$, damit ist diese Formel nicht gültig.
+  
+  \item[\enquote{$\Rightarrow$}]
+  Angenommen, $\ANDop\Gamma_\tau \rightarrow \varphi[P_=/=]$ ist nicht gültig. Dann gibt es Struktur $\mathfrak{A}$ mit $\mathfrak{A}\not\models\ANDop\Gamma_\tau\rightarrow\varphi[P_=/=]$. Dann $\mathfrak{A}\models\ANDop\Gamma_\tau$ und $\mathfrak{A}\not\models\varphi[P_=/=]$. Wegen ersterem ist $P_=^\mathfrak{A}$ Äquivalenzrelation auf $A$. Für $a\in A$ sei $[a]$ die Äquivalenzklasse von $a$. Definiere Struktur $\hat{\mathfrak{A}}$ (Quotientenstruktur):
+  \begin{align*}
+    \hat{A} &= \set{[a] \mid a\in A}\\
+    R^{\hat{\mathfrak{A}}} &= \set{([a_1],\dots,[a_n]) \mid (a_1,\dots,a_n) \in R^\mathfrak{A} }\\
+  \end{align*}
+  
+  Für jede Zuweisung $\beta$ in $\mathfrak{A}$ sei $\hat{\beta}$ die Zuweisungen in $\hat{\mathfrak{A}}$ mit $\hat{\beta}(x)=[\beta(x)]$. Man zeigt per Induktion über die Struktur von $\psi$
+  \begin{itemize}
+    \item[$(*)$] Für alle $\psi\in FO(\tau)$ und alle Zuweisungen $\beta$ gilt $\mathfrak{A},\beta\models\psi[P_=/=]$ gdw. $\hat{\mathfrak{A}},\hat{\beta}\models\psi$.
+  \end{itemize}
+  Wegen $\mathfrak{A}\not\models\varphi[P_=/=]$ folgt $\hat{\mathfrak{A}}\not\models\varphi$, also ist $\varphi$ nicht gültig.
+\end{description}
+\qed
