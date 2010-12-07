@@ -19,4 +19,29 @@
   \item Nicht vollständig: Wenn $\mathcal{K}$ die Klasse aller Strukturen, dann $\Th(\mathcal{K}) = \Taut(\tau)$
 \end{enumerate}
 
+\subsection{?? (vor Axiomatisierung)}
+
+\begin{description}[style=nextline]
+  \item[(1)$\IMPL$(2)]
+  Sei $\Gamma$ vollständig. Da $\Gamma$ erfüllbar gibt es Struktur $\Afrak$ mit $\Afrak\models\Gamma$,
+  also $\Gamma\subseteq\Th(\Afrak)$. Es gilt auch $\Th(\Afrak)\subseteq\Gamma$:
+  Wenn $\varphi\in\Th(\Afrak)$, dann $\varphi\in\Gamma$ oder $\NOT\varphi\in\Gamma$.
+  Letzteres ist unmöglich wegen $\Afrak\models\Gamma$.
+  
+  \item[(2)$\IMPL$(3)]
+  Sei $\Gamma=\Th(\Afrak)$, $\Afrak', \Afrak''$ Meodell von $\Gamma$ und $\Afrak'\models\varphi$.
+  Zu zeigen: $\Afrak''\models\varphi$. Wegen $\Afrak\models\varphi$ oder $\Afrak\models\NOT\varphi$,
+  also $\varphi\in\Gamma$ oder $\NOT\varphi\in\Gamma$. Da $\Afrak'\models\Gamma$ und $\Afrak'\models\varphi$
+  ist letzteres unmöglich. Also $\varphi\in\Gamma$ und wegen $\Afrak''\models\Gamma$ also auch $\Afrak''\models\varphi$.
+  
+  \item[(3)$\IMPL$(1)]
+  Seien alle Modelle von $\Gamma$ elementar äquivalent, und $\varphi\in FO(\tau)$. Angenommen,
+  $\varphi\not\in\Gamma$ und $\NOT\varphi\not\in\Gamma$. Dann $\Gamma\not\models\varphi$ und
+  $\Gamma\not\models\NOT\varphi$, also gibt es Modelle $\Afrak, \Afrak'$ von $\Gamma$ mit
+  $\Afrak\models\varphi$ und $\Afrak'\models\NOT\varphi$. Dan sind $\Afrak$ und $\Afrak'$ nicht elementar
+  äquivalent.
+\end{description}
+
+\subsection{}
+
 
