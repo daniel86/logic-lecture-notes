@@ -32,12 +32,12 @@
 \subsection{FO und Datenbanken}
 
 \begin{align*}
-  \text{Film}^{\mathfrak{A}} &= \set{
+  \text{Film}^{\Afrak} &= \set{
                                   (\text{Die Vögel}, 1963, \text{Hitchcock}),
                                   (\text{Marnie}, 1964, \text{Hitchcock}),
                                   \dots
                                 } \\
-  \text{Schauspieler}^{\mathfrak{A}} &= \set{(\text{Connery}, \text{Marnie}), \dots}
+  \text{Schauspieler}^{\Afrak} &= \set{(\text{Connery}, \text{Marnie}), \dots}
 \end{align*}
 
 \subsection{Beispiel Domänenunabhängigkeit}
@@ -46,10 +46,10 @@ Beispiele für domänenabhängige FO-Formeln
 
 \begin{tabular}{@{}*{2}{>{$}l<{\quad$}@{}}}
   \varphi = \NOT P(x) & \\
-  \mathfrak{A}:_{P(a)}                     & \mathfrak{A}':_{P(a) \qquad a'} \\
-  \ans(\mathfrak{A}, \varphi) = \emptyset  & \ans(\mathfrak{A}', \varphi) = \set{a'} \\
+  \Afrak:_{P(a)}                     & \Afrak':_{P(a) \qquad a'} \\
+  \ans(\Afrak, \varphi) = \emptyset  & \ans(\Afrak', \varphi) = \set{a'} \\
   \varphi' = P(x) \OR \exists y.P(y)       & \\
-  \ans(\mathfrak{A}, \varphi') = \set{a}   & \ans(\mathfrak{A}', \varphi') = \set{a, a'} \\
+  \ans(\Afrak, \varphi') = \set{a}   & \ans(\Afrak', \varphi') = \set{a, a'} \\
 \end{tabular}
 
 Alle Übersetzungen von Kern-SQL-Anfragen in FO sind domänenunabhängig, z.B.
@@ -85,11 +85,11 @@ Konsequenz:
 PNF, exemplarisch die erste Äquivalenz:
 
 \begin{align}
-  \mathfrak{A}, \beta &\models \varphi \OR \exists x.\psi \\
-  \text{gdw.}\quad \mathfrak{A}, \beta &\models \varphi\ \text{oder es gibt}\ a\in A\ \text{mit}\ \mathfrak{A}, \beta[x/a] \models \psi \\
-  \text{gdw. es gibt $a\in A$, so dass}\ \mathfrak{A}, \beta[x/a] &\models \varphi\ \text{oder}\ \mathfrak{A}, \beta[x/a] \models \psi\\
+  \Afrak, \beta &\models \varphi \OR \exists x.\psi \\
+  \text{gdw.}\quad \Afrak, \beta &\models \varphi\ \text{oder es gibt}\ a\in A\ \text{mit}\ \Afrak, \beta[x/a] \models \psi \\
+  \text{gdw. es gibt $a\in A$, so dass}\ \Afrak, \beta[x/a] &\models \varphi\ \text{oder}\ \Afrak, \beta[x/a] \models \psi\\
       & \qquad\qquad\text{(weil $x$ nicht frei in $\varphi$ vorkommt)} \\
-  \text{gdw.}\quad \mathfrak{A}, \beta[x/a] &\models \exists x.(\varphi \OR \psi)
+  \text{gdw.}\quad \Afrak, \beta[x/a] &\models \exists x.(\varphi \OR \psi)
 \end{align}
 
 Beweis per Induktion über die Struktur von $\varphi$.

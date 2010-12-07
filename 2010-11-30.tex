@@ -34,42 +34,42 @@ Indexfolge 2,3 ist Lösung:
   \item[\enquote{$\Leftarrow$}]
   Sei $\varphi_F$ fültig. Betrachte folgende Struktur:
   \begin{align*}
-    \mathfrak{A} &= (A, c_\epsilon, f_0, f_1, P) \qquad\text{mit} \\
+    \Afrak &= (A, c_\epsilon, f_0, f_1, P) \qquad\text{mit} \\
     A &= \set{0,1}^*\\
-    c_\epsilon^{\mathfrak{A}} &= \epsilon\\
-    f_0^{\mathfrak{A}}(w) &= w \cdot 0\\
-    f_1^{\mathfrak{A}}(w) &= w \cdot 1\\
+    c_\epsilon^{\Afrak} &= \epsilon\\
+    f_0^{\Afrak}(w) &= w \cdot 0\\
+    f_1^{\Afrak}(w) &= w \cdot 1\\
     P &= \set{(u,v) \mid \text{es gibt $i_1,\dots,i_l$ mit $u=u_{i_1}\cdots u_{i_l}$ und $v=v_{i_1}\cdots v_{i_l}$}}
   \end{align*}
   
   Es gilt
   \begin{enumerate}
-    \item $\mathfrak{A} \models \varphi$ (nach Definition von $P$ und wegen $t_w(c_\epsilon)^{\mathfrak{A}}=w$ für alle $w\in\set{0,1}^*$)
-    \item $\mathfrak{A} \models \psi$: wenn $(u,v)\in P^{\mathfrak{A}}$, dann folgt mit Definition von $P$ auch $P(uu_i, vv_i)$ für $1\leq i\leq h$.
+    \item $\Afrak \models \varphi$ (nach Definition von $P$ und wegen $t_w(c_\epsilon)^{\Afrak}=w$ für alle $w\in\set{0,1}^*$)
+    \item $\Afrak \models \psi$: wenn $(u,v)\in P^{\Afrak}$, dann folgt mit Definition von $P$ auch $P(uu_i, vv_i)$ für $1\leq i\leq h$.
     
-    Wegen $t_w^\mathfrak{A}(w') = w'w$ für alle $w,w'\in\set{0,1}^*$, also $P(t_{u_i}^\mathfrak{A}(u), t_{v_i}^\mathfrak{A}(v))$.
+    Wegen $t_w^\Afrak(w') = w'w$ für alle $w,w'\in\set{0,1}^*$, also $P(t_{u_i}^\Afrak(u), t_{v_i}^\Afrak(v))$.
 
-    Wegen Gültigkeit von $\varphi_F$, also $\mathfrak{A} \models \exists x.P(x,x)$. Nach Definition von $P$ hat $F$ aleo eine Lösung.
+    Wegen Gültigkeit von $\varphi_F$, also $\Afrak \models \exists x.P(x,x)$. Nach Definition von $P$ hat $F$ aleo eine Lösung.
   \end{enumerate}
   
   \item[\enquote{$\Rightarrow$}]
-  Sei $i_1,\dots,i_l$ Lösung für $F$ und $\mathfrak{A} = (A, c, f_1, f_2, P)$ eine Struktur. Zu zeigen: $\mathfrak{A}\models\varphi_F$.
+  Sei $i_1,\dots,i_l$ Lösung für $F$ und $\Afrak = (A, c, f_1, f_2, P)$ eine Struktur. Zu zeigen: $\Afrak\models\varphi_F$.
   
-  Wenn $\mathfrak{A}\not\models \varphi\AND\psi$, gilt $\mathfrak{A}\models\varphi_F$. Es gelte $\mathfrak{A}\models\varphi\AND\psi$.
+  Wenn $\Afrak\not\models \varphi\AND\psi$, gilt $\Afrak\models\varphi_F$. Es gelte $\Afrak\models\varphi\AND\psi$.
   Definiere Abbildung $h : \set{0,1}^* \rightarrow A$:
   \begin{align*}
-    h(\epsilon) &= c_\epsilon^\mathfrak{A}\\
-    h(w0) &= f_0^{\mathfrak{A}}(h(w))\\
-    h(w1) &= f_1^{\mathfrak{A}}(h(w))
+    h(\epsilon) &= c_\epsilon^\Afrak\\
+    h(w0) &= f_0^{\Afrak}(h(w))\\
+    h(w1) &= f_1^{\Afrak}(h(w))
   \end{align*}
   
-  Man sieht leicht, dass $h(w)=t_w(c_\epsilon)^\mathfrak{A}$ für alle $w\in\set{0,1}^*$.
+  Man sieht leicht, dass $h(w)=t_w(c_\epsilon)^\Afrak$ für alle $w\in\set{0,1}^*$.
   
-  Wegen $\mathfrak{A} \models \varphi$, also $(h(u_{i_1}), h(v_{i_1}) \in P^{\mathfrak{A}}$.
+  Wegen $\Afrak \models \varphi$, also $(h(u_{i_1}), h(v_{i_1}) \in P^{\Afrak}$.
   
-  Wegen $\mathfrak{A} \models \psi$ können wir unduktiv schließen, dass $(h(u_{i_1}\cdots u_{i_r}), h(v_{i_1}\cdots v_{i_r}))\in P^{\mathfrak{A}}$ für $1\leq r\leq l$.
+  Wegen $\Afrak \models \psi$ können wir unduktiv schließen, dass $(h(u_{i_1}\cdots u_{i_r}), h(v_{i_1}\cdots v_{i_r}))\in P^{\Afrak}$ für $1\leq r\leq l$.
   
-  Sei $u_{i_1}\cdots u_{i_r} = v_{i_1}\cdots v_{i_r} = w$. Es gilt also $(h(w),h(w)) \in P^{\mathfrak{A}}$, damit $\mathfrak{A} \models \exists x.P(x,x)$, also $\mathfrak{A}\models\varphi_F$.
+  Sei $u_{i_1}\cdots u_{i_r} = v_{i_1}\cdots v_{i_r} = w$. Es gilt also $(h(w),h(w)) \in P^{\Afrak}$, damit $\Afrak \models \exists x.P(x,x)$, also $\Afrak\models\varphi_F$.
 \end{description}
 
 \subsection{Beweis Theorem}
@@ -78,21 +78,21 @@ Wir nehmen o.B.d.A. an, dass $\varphi$ ein Satz ist (universeller Abschluss).
 
 \begin{description}
   \item[\enquote{$\Leftarrow$}]
-  Angenommen, $\varphi$ ist nicht gültig. Dann gibt es Struktur $\mathfrak{A}$ mit $\mathfrak{A}\not\models\varphi$.
-  Erweitere $\mathfrak{A}$ um $P^\mathfrak{A} = \set{(a,a)\mid a\in A}$.
-  Offensichtlich gilt $\mathfrak{A}\models\ANDop\Gamma_\tau$. Man zeigt leicht, dass $\mathfrak{A},\beta\models\psi$ gdw. $\mathfrak{A},\beta\models\psi[P_=/=]$ für alle $\psi\in FO(\tau)$ und Zuweisungen $\beta$. Wegen $\mathfrak{A}\not\models\varphi$, also $\mathfrak{A}\not\models\varphi[P_=/=]$, also $\mathfrak{A}\not\models\ANDop\Gamma_\tau \rightarrow \varphi[P_=/=]$, damit ist diese Formel nicht gültig.
+  Angenommen, $\varphi$ ist nicht gültig. Dann gibt es Struktur $\Afrak$ mit $\Afrak\not\models\varphi$.
+  Erweitere $\Afrak$ um $P^\Afrak = \set{(a,a)\mid a\in A}$.
+  Offensichtlich gilt $\Afrak\models\ANDop\Gamma_\tau$. Man zeigt leicht, dass $\Afrak,\beta\models\psi$ gdw. $\Afrak,\beta\models\psi[P_=/=]$ für alle $\psi\in FO(\tau)$ und Zuweisungen $\beta$. Wegen $\Afrak\not\models\varphi$, also $\Afrak\not\models\varphi[P_=/=]$, also $\Afrak\not\models\ANDop\Gamma_\tau \rightarrow \varphi[P_=/=]$, damit ist diese Formel nicht gültig.
   
   \item[\enquote{$\Rightarrow$}]
-  Angenommen, $\ANDop\Gamma_\tau \rightarrow \varphi[P_=/=]$ ist nicht gültig. Dann gibt es Struktur $\mathfrak{A}$ mit $\mathfrak{A}\not\models\ANDop\Gamma_\tau\rightarrow\varphi[P_=/=]$. Dann $\mathfrak{A}\models\ANDop\Gamma_\tau$ und $\mathfrak{A}\not\models\varphi[P_=/=]$. Wegen ersterem ist $P_=^\mathfrak{A}$ Äquivalenzrelation auf $A$. Für $a\in A$ sei $[a]$ die Äquivalenzklasse von $a$. Definiere Struktur $\hat{\mathfrak{A}}$ (Quotientenstruktur):
+  Angenommen, $\ANDop\Gamma_\tau \rightarrow \varphi[P_=/=]$ ist nicht gültig. Dann gibt es Struktur $\Afrak$ mit $\Afrak\not\models\ANDop\Gamma_\tau\rightarrow\varphi[P_=/=]$. Dann $\Afrak\models\ANDop\Gamma_\tau$ und $\Afrak\not\models\varphi[P_=/=]$. Wegen ersterem ist $P_=^\Afrak$ Äquivalenzrelation auf $A$. Für $a\in A$ sei $[a]$ die Äquivalenzklasse von $a$. Definiere Struktur $\hat{\Afrak}$ (Quotientenstruktur):
   \begin{align*}
     \hat{A} &= \set{[a] \mid a\in A}\\
-    R^{\hat{\mathfrak{A}}} &= \set{([a_1],\dots,[a_n]) \mid (a_1,\dots,a_n) \in R^\mathfrak{A} }\\
+    R^{\hat{\Afrak}} &= \set{([a_1],\dots,[a_n]) \mid (a_1,\dots,a_n) \in R^\Afrak }\\
   \end{align*}
   
-  Für jede Zuweisung $\beta$ in $\mathfrak{A}$ sei $\hat{\beta}$ die Zuweisungen in $\hat{\mathfrak{A}}$ mit $\hat{\beta}(x)=[\beta(x)]$. Man zeigt per Induktion über die Struktur von $\psi$
+  Für jede Zuweisung $\beta$ in $\Afrak$ sei $\hat{\beta}$ die Zuweisungen in $\hat{\Afrak}$ mit $\hat{\beta}(x)=[\beta(x)]$. Man zeigt per Induktion über die Struktur von $\psi$
   \begin{itemize}
-    \item[$(*)$] Für alle $\psi\in FO(\tau)$ und alle Zuweisungen $\beta$ gilt $\mathfrak{A},\beta\models\psi[P_=/=]$ gdw. $\hat{\mathfrak{A}},\hat{\beta}\models\psi$.
+    \item[$(*)$] Für alle $\psi\in FO(\tau)$ und alle Zuweisungen $\beta$ gilt $\Afrak,\beta\models\psi[P_=/=]$ gdw. $\hat{\Afrak},\hat{\beta}\models\psi$.
   \end{itemize}
-  Wegen $\mathfrak{A}\not\models\varphi[P_=/=]$ folgt $\hat{\mathfrak{A}}\not\models\varphi$, also ist $\varphi$ nicht gültig.
+  Wegen $\Afrak\not\models\varphi[P_=/=]$ folgt $\hat{\Afrak}\not\models\varphi$, also ist $\varphi$ nicht gültig.
 \end{description}
 \qed
