@@ -12,7 +12,7 @@ Für alle Herbrand-Strukturen für $\tau$ gilt:
   c^\Hfrak &= c \qquad f_1^\Hfrak(c) = f_1(c) \qquad f_2^\Hfrak(c) = f_2(c) \qquad \dots
 \end{align*}
 
-Die Interpretation von P ist frei, z.B.
+Die Interpretation von $P$ ist frei, z.B.
 
 \begin{verbatim}
   Baum-/Graph-Struktur von Bernd/Carsten tikzen
@@ -52,27 +52,30 @@ ist, wird mittels SK-Beweisen für
 
 Wir konstruieren zwei Folgen:
 
-\Gamma_0 \subseteq \Gamma_1 \subseteq \dots und
-\Delta_0 \subseteq \Delta_1 \subseteq \dots und setzen
+\[ \Gamma_0 \subseteq \Gamma_1 \subseteq \dots \quad \text{und} \quad \Delta_0 \subseteq \Delta_1 \subseteq \dots \]
 
-\Gamma* = \bigcup_{i\geq 0} \Gamma_i und
-\Delta* = \bigcup_{i\geq 0} \Delta_i
+und setzen
+
+\[ \Gamma* = \bigcup_{i\geq 0} \Gamma_i \quad \text{und} \quad \Delta* = \bigcup_{i\geq 0} \Delta_i\ \text{.} \]
 
 Diese Konstruktion stellt sicher, dass
+
 \begin{itemize}
-  \item[(*)] \Gamma_n \IMPL \Delta_n nicht ableitbar für alle n\geq 0.
+  \item[$(*)$] $\Gamma_n \IMPL \Delta_n$ nicht ableitbar für alle $n\geq 0$.
 \end{itemize}
 
-Wir beginnen mit \Gamma_0=\Gamma und \Delta_0=\Delta.
+Wir beginnen mit $\Gamma_0=\Gamma$ und $\Delta_0=\Delta$. Da $\tau$
+abzählbar, gibt es Aufzählung
 
-Da \tau abzählbar, gibt es Aufzählung
-  (\varphi_0, t_0), (\varphi_1, t_1), \dots,
-so dass jedes Paar (\varphi,t) mit \varphi Satz aus FO(\tau) und t Grundterm
-aus T(\tau) unendlich oft vorkommt.
+\[
+  (\varphi_0, t_0), (\varphi_1, t_1), \dots
+\]
+
+so, dass jedes Paar $(\varphi,t)$ mit $\varphi$ Satz aus $FO(\tau)$ und $t$ Grundterm
+aus $T(\tau)$ unendlich oft vorkommt:
 
 \begin{verbatim}
-  "Dovetailing" + Reset
-  tikzen
+  "Dovetailing" + Reset tikzen
   
   (\varphi_0, t_0),
   (\varphi_0, t_0),(\varphi_1, t_1),
@@ -82,51 +85,124 @@ aus T(\tau) unendlich oft vorkommt.
   .
 \end{verbatim}
 
-Für $n\geq 0$ konstruieren $\Gamma_{n+1}, \Delta_{n+1}$ wie folgt:
+Für $n\geq 0$ konstruieren wir $\Gamma_{n+1}, \Delta_{n+1}$ wie folgt:
 
 \begin{enumerate}
-  \item $\varphi_n \in \NOT\psi$\\
+  \item $\varphi_n \in \NOT\psi$
+  
   Wenn $\varphi_n \in \Gamma_n$, dann $\Gamma_{n+1}=\Gamma_n, \Delta_{n+1}=\Delta_n\cup\set{\psi}$.\\
   Wenn $\varphi_n \in \Delta_n$, dann $\Gamma_{n+1}=\Gamma_n\cup\set{\psi}, \Delta_{n+1}=\Delta_n$.\\
   (Sonst: $\Gamma_{n+1}=\Gamma_n, \Delta_{n+1}=\Delta_n$)
   
   Mit den Regeln ($\NOT\IMPL$) und ($\IMPL\NOT$) folgt, dass $\Gamma_{n+1}\IMPL\Delta_{n+1}$ nicht ableitbar.
-  Exemplarisch 1. Fall:
+  Exemplarisch erster Fall:
   
-  Angenommen, $\Gamma_n\IMPL\Delta_n\cup\set{\psi}$ ist ableitbar. Dann mit ($\NOT\IMPL$) auch $\Gamma_n\cup\set{\NOT\psi}\IMPL\Delta_n = \Gamma_n\IMPL\Delta_n$. $\lightning$
+  Angenommen, $\Gamma_n\IMPL\Delta_n\cup\set{\psi}$ ist ableitbar. Dann mit ($\NOT\IMPL$)
+  auch $\Gamma_n\cup\set{\NOT\psi}\IMPL\Delta_n=\Gamma_n\IMPL\Delta_n$. $\lightning$
   
-  \item $\varphi_n = \psi_1 \AND \psi_2$\\
-  Wenn $\varphi_n \in \Gamma_n$, dann $\Gamma_{n+1}=\Gamma_n\cup\set{\psi_1, \psi_2}, \Delta_{n+1}=\Delta_n$.
+  \item $\varphi_n = \psi_1 \AND \psi_2$
+  
+  Wenn $\varphi_n \in \Gamma_n$, dann $\Gamma_{n+1}=\Gamma_n\cup\set{\psi_1,\psi_2}, \Delta_{n+1}=\Delta_n$.
   Dann $\Gamma_{n+1}\IMPL\Delta_{n+1}$ nicht ableitbar wegen ($\AND\IMPL$).
   
   Wenn $\varphi_n\in\Delta_n$, dann ist
-    (i) $\Gamma_n \in \Delta_n\cup\set{\psi_1}$ oder
-    (ii) $\Gamma_n\IMPL\Delta_n\cup\set{psi_2}$ nicht ableitbar,
+
+  \begin{enumerate}[label=(\roman*)]
+    \item $\Gamma_n \in \Delta_n\cup\set{\psi_1}$ oder
+    \item $\Gamma_n\IMPL\Delta_n\cup\set{psi_2}$ nicht ableitbar,
+  \end{enumerate}
+
   denn sonst wäre ($\IMPL\AND$) auch $\Gamma_n\IMPL\Delta_n$ ableitbar.
   
-  Setze \Gamma_{n+1}=\Gamma_n und \Delta_{n+1}=\Delta_n\cup\set{\psi_1}.
+  Setze $\Gamma_{n+1}=\Gamma_n$ und $\Delta_{n+1}=\Delta_n\cup\set{\psi_1}$.
   Wenn Fall (i) zutrifft.
   
-  \item \varphi_n = \exists x.\varphi(x)\\
-  Wenn \varphi_n\in\Gamma_n, dann wähle c\in C, welches nicht in \Gamma_n\cup\Delta_n
-  vorkommt. Setze \Gamma_{n+1}=\Gamma_n\cup\set{\psi(c)}, \Delta_{n+1}=\Delta_n.
+  \item $\varphi_n = \exists x.\varphi(x)$
   
-  Wenn \varphi_n\in\Delta_n, dann setze \Gamma_{n+1}=\Gamma_n und \Delta_{n+1}=\Delta_n\cup\set{\psi(t_n)}.
+  Wenn $\varphi_n\in\Gamma_n$, dann wähle $c\in C$, welches nicht in
+  $\Gamma_n\cup\Delta_n$ vorkommt. Setze $\Gamma_{n+1}=\Gamma_n\cup\set{\psi(c)},
+  \Delta_{n+1}=\Delta_n$.
+  
+  Wenn $\varphi_n\in\Delta_n$, dann setze $\Gamma_{n+1}=\Gamma_n$ und
+  $\Delta_{n+1}=\Delta_n\cup\set{\psi(t_n)}$.
 \end{enumerate}
 
-Mit den Regeln (\exists\IMPL) und (\IMPL\exists) folgt, dass \Gamma_{n+1}\IMPL\Delta_{n+1} nicht ableitbar.
+Mit den Regeln ($\exists\IMPL$) und ($\IMPL\exists$) folgt, dass
+$\Gamma_{n+1}\IMPL\Delta_{n+1}$ nicht ableitbar.
 
-Es bleibt, zu überprüfen, dass \Gamma^*,\Delta^* die Bedingungen 1--4 des Lemmas erfüllen. Exemplarisch 1+4:
+Es bleibt zu überprüfen, dass $\Gamma^*,\Delta^*$ die Bedingungen 1--4
+des Lemmas erfüllen. Exemplarisch 1+4:
 
 \begin{enumerate}
-  \item Wenn \varphi\in\Gamma^*\cap\Delta^*, dann gibt es n\geq 0 mit \varphi\in\Gamma_n\cap\Delta_n. Dann ist \Gamma_n\IMPL\Delta_n ein Axiom und damit ableitbar, im Widerspruch zu (*).
+  \item Wenn $\varphi\in\Gamma^*\cap\Delta^*$, dann gibt es $n\geq 0$ mit
+  $\varphi\in\Gamma_n\cap\Delta_n$. Dann ist $\Gamma_n\IMPL\Delta_n$ ein
+  Axiom und damit ableitbar, im Widerspruch zu (*).
   
-  \item[4.] Wenn \exists x.\varphi(x)\in\Gamma^*, dann \exists x.\psi(x)\in\Gamma_m für ein m\geq 0. Dann gibt es ein n\geq m mit \varphi_n=\exists x.\psi(x). Nach (c) gilt \psi(c)\in\Gamma_{n+1}\subseteq\Gamma^* für eine Konstante c.
+  \item[4.] Wenn $\exists x.\varphi(x)\in\Gamma^*$, dann
+  $\exists x.\psi(x)\in\Gamma_m$ für ein $m\geq 0$. Dann gibt es ein
+  $n\geq m$ mit $\varphi_n=\exists x.\psi(x)$. Nach (3) gilt
+  $\psi(c)\in\Gamma_{n+1}\subseteq\Gamma^*$ für eine Konstante $c$.
   
-  Wenn \exists x.\psi(x)\in\Delta^* und t beliebiger Grundterm, dann gibt es n\geq 0 mit \exists x.\psi(x)\in\Delta_n, \varphi_n=\exists x.\psi(x) und t_n=t. Also \psi(t_n)\in\Delta_{n+1}\in\subseteq\Delta^*.
+  Wenn $\exists x.\psi(x)\in\Delta^*$ und $t$ beliebiger Grundterm, dann
+  gibt es $n\geq 0$ mit $\exists x.\psi(x)\in\Delta_n$,
+  $\varphi_n=\exists x.\psi(x)$ und $t_n=t$. Also
+  $\psi(t_n)\in\Delta_{n+1}\in\subseteq\Delta^*$.
 \end{enumerate}
 \qed
 
 \subsubsection{Vollständig (kontrapositiv)}
 
-Sei \Gamma\IMPL\Delta nicht ableitbar, \Gamma^* und \Delta^* wie im Lemma.
+Sei $\Gamma\IMPL\Delta$ nicht ableitbar, $\Gamma^*$ und $\Delta^*$ wie
+im Lemma. Sei $\Afrak$ die kanonische Herbrand-Struktur von $\Gamma^*$,
+also
+
+\[
+  R^\Afrak = \set{(t_1,\dots,t_n) | R(t_1,\dots,t_n)\in\Gamma^*}.
+\]
+
+Wir wollen zeigen, dass $\Afrak\models\ANDop\Gamma \AND \ANDop\NOT\Delta$,
+denn dann ist $\Gamma\IMPL\Delta$ nicht gültig. Wegen $\Gamma\subseteq\Gamma^*$
+und $\Delta\subseteq\Delta^*$ genügt es, zu zeigen, dass
+$\Afrak\models\ANDop\Gamma^* \AND \ANDop \NOT\Delta^*$.
+
+Dies folgt aus folgender Behauptung:
+
+Für alle $\tau$-Sätze $\varphi$ gilt:
+
+\begin{enumerate}
+  \item $\varphi\in\Gamma^*$ impliziert $\Afrak\models\varphi$
+  \item $\varphi\in\Delta^*$ impliziert $\Afrak\not\models\varphi$
+\end{enumerate}
+  
+Beweis per Induktion über Ordnung \enquote{$c$} auf $FO(\tau)$, wobei
+$\varphi<\psi$ wenn $\varphi$ aus Teilformel von $\psi$ hervorgeht, indem
+freie Variable durch Grundterm ersetzt werden.
+
+\begin{itemize}
+  \item $\varphi$ ist ein Atom, also von der Form $R(t_1,\dots,t_n)$.
+  Behauptung folgt direkt aus Definition von $\Afrak$ und aus Bedingung 1 des Lemmas.
+  
+  \item $\varphi = \NOT\psi$
+  \begin{enumerate}
+    \item $\varphi\in\Gamma^*\IMPL\psi\in\Delta^*$ (Eigenschaft 2 des Lemmas)\\
+                            $\IMPL\Afrak\not\in\psi$ (IV)\\
+                            $\IMPL\Afrak\models\varphi$ (Semantik)
+    \item $\varphi\in\Delta^*\IMPL\psi\in\Gamma^*$ (Eigenschaft 2)\\
+                            $\IMPL\Afrak\models\psi$ (IV)\\
+                            $\IMPL\Afrak\not\in\varphi$
+  \end{enumerate}
+
+  \item $\varphi=\psi_1\AND\psi_2$      ähnlich zu vorigem Fall
+  
+  \item $\varphi=\exists x.\psi(x)$
+  \begin{enumerate}
+    \item $\varphi\in\Gamma^*\IMPL\psi[t]\in\Gamma^*$ für Grundterm $t$\\
+                            $\IMPL\Afrak\models\psi[t]$ für Grundterm $t$ (IV)\\
+                            $\IMPL\Afrak\varphi$
+                          
+    \item $\varphi\in\Delta^*\IMPL\psi[t]\in\Delta^*$ für Grundterm $t$\\
+                            $\IMPL\Afrak\not\models\psi[t]$ für Grundterm $t$\\
+                            $\IMPL\Afrak\not\models\varphi$ (da $A$ die Menge aller Grundterme ist).
+  \end{enumerate}
+\end{itemize}
+\qed
