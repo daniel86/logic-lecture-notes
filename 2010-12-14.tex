@@ -1,0 +1,132 @@
+\section{VL von 14.~Dezember 2010}
+
+\subsection{Beispiel Herbrand-Struktur}
+
+Sei $\tau = \set{c, f_1, f_2, P}$, wobei $c\in F^0(\tau)$ (Konstantensymbol)
+$f_1,f_2 \in F^1(\tau)$ und $P \in R^2(\tau)$.
+
+Für alle Herbrand-Strukturen für $\tau$ gilt:
+
+\begin{align*}
+  H &= \set{c, f_1(c), f_2(c), f_1(f_1(c)), f_1(f_2(c)), \dots} \\
+  c^\Hfrak &= c \qquad f_1^\Hfrak(c) = f_1(c) \qquad f_2^\Hfrak(c) = f_2(c) \qquad \dots
+\end{align*}
+
+Die Interpretation von P ist frei, z.B.
+
+\begin{verbatim}
+  Baum-/Graph-Struktur von Bernd/Carsten tikzen
+\end{verbatim}
+
+Es genügt, zu zeigen
+
+\begin{itemize}
+  \item[$(*)$] Für alle Sequenzen $\Gamma\IMPL\Delta$ und deren reduzierte Varianten
+  $\Gamma'\IMPL\Delta'$ gilt: Jeder SK-Beweis für $\Gamma'\IMPL\Delta'$ kann in SK-Beweis
+  für $\Gamma\IMPL\Delta$ gewandelt werden.
+  
+  Denn dann gilt:
+  
+  \begin{align*}
+                            &\models\Gamma \IMPL\Delta \\
+    \text{impliziert} \quad &\models\Gamma'\IMPL\Delta' && \text{(Äquivalenz)} \\
+    \text{impliziert} \quad &\vdash \Gamma'\IMPL\Delta' && \text{(alle gültigen reduzierten Sequenzen ableitbar)} \\
+    \text{impliziert} \quad &\vdash \Gamma \IMPL\Delta  && (*)
+  \end{align*}
+\end{itemize}
+
+Beweisidee $(*)$:
+
+Um SK-Beweis für $\Gamma\IMPL\Delta$ zu erhalten, folge derselben Strategie wie im
+Beweis von $\Gamma'\IMPL\Delta'$. Jede auftretende Teilformel, die nicht reduziert
+ist, wird mittels SK-Beweisen für
+
+\begin{align*}
+  \varphi \OR \psi &\EQUIV \NOT(\NOT\varphi \AND \NOT\psi) \\
+  \forall x.\varphi(x) &\EQUIV \NOT\exists x.\NOT\varphi(x)
+\end{align*}
+
+\enquote{on the fly} in reduzierte Form gewandelt.
+
+\subsection{??}
+
+Wir konstruieren zwei Folgen:
+
+\Gamma_0 \subseteq \Gamma_1 \subseteq \dots und
+\Delta_0 \subseteq \Delta_1 \subseteq \dots und setzen
+
+\Gamma* = \bigcup_{i\geq 0} \Gamma_i und
+\Delta* = \bigcup_{i\geq 0} \Delta_i
+
+Diese Konstruktion stellt sicher, dass
+\begin{itemize}
+  \item[(*)] \Gamma_n \IMPL \Delta_n nicht ableitbar für alle n\geq 0.
+\end{itemize}
+
+Wir beginnen mit \Gamma_0=\Gamma und \Delta_0=\Delta.
+
+Da \tau abzählbar, gibt es Aufzählung
+  (\varphi_0, t_0), (\varphi_1, t_1), \dots,
+so dass jedes Paar (\varphi,t) mit \varphi Satz aus FO(\tau) und t Grundterm
+aus T(\tau) unendlich oft vorkommt.
+
+\begin{verbatim}
+  "Dovetailing" + Reset
+  tikzen
+  
+  (\varphi_0, t_0),
+  (\varphi_0, t_0),(\varphi_1, t_1),
+  (\varphi_0, t_0),(\varphi_1, t_1),(\varphi_2, t_2),
+  (\varphi_0, t_0),(\varphi_1, t_1),(\varphi_2, t_2),(\varphi_3, t_3),
+  :
+  .
+\end{verbatim}
+
+Für $n\geq 0$ konstruieren $\Gamma_{n+1}, \Delta_{n+1}$ wie folgt:
+
+\begin{enumerate}
+  \item $\varphi_n \in \NOT\psi$\\
+  Wenn $\varphi_n \in \Gamma_n$, dann $\Gamma_{n+1}=\Gamma_n, \Delta_{n+1}=\Delta_n\cup\set{\psi}$.\\
+  Wenn $\varphi_n \in \Delta_n$, dann $\Gamma_{n+1}=\Gamma_n\cup\set{\psi}, \Delta_{n+1}=\Delta_n$.\\
+  (Sonst: $\Gamma_{n+1}=\Gamma_n, \Delta_{n+1}=\Delta_n$)
+  
+  Mit den Regeln ($\NOT\IMPL$) und ($\IMPL\NOT$) folgt, dass $\Gamma_{n+1}\IMPL\Delta_{n+1}$ nicht ableitbar.
+  Exemplarisch 1. Fall:
+  
+  Angenommen, $\Gamma_n\IMPL\Delta_n\cup\set{\psi}$ ist ableitbar. Dann mit ($\NOT\IMPL$) auch $\Gamma_n\cup\set{\NOT\psi}\IMPL\Delta_n = \Gamma_n\IMPL\Delta_n$. $\lightning$
+  
+  \item $\varphi_n = \psi_1 \AND \psi_2$\\
+  Wenn $\varphi_n \in \Gamma_n$, dann $\Gamma_{n+1}=\Gamma_n\cup\set{\psi_1, \psi_2}, \Delta_{n+1}=\Delta_n$.
+  Dann $\Gamma_{n+1}\IMPL\Delta_{n+1}$ nicht ableitbar wegen ($\AND\IMPL$).
+  
+  Wenn $\varphi_n\in\Delta_n$, dann ist
+    (i) $\Gamma_n \in \Delta_n\cup\set{\psi_1}$ oder
+    (ii) $\Gamma_n\IMPL\Delta_n\cup\set{psi_2}$ nicht ableitbar,
+  denn sonst wäre ($\IMPL\AND$) auch $\Gamma_n\IMPL\Delta_n$ ableitbar.
+  
+  Setze \Gamma_{n+1}=\Gamma_n und \Delta_{n+1}=\Delta_n\cup\set{\psi_1}.
+  Wenn Fall (i) zutrifft.
+  
+  \item \varphi_n = \exists x.\varphi(x)\\
+  Wenn \varphi_n\in\Gamma_n, dann wähle c\in C, welches nicht in \Gamma_n\cup\Delta_n
+  vorkommt. Setze \Gamma_{n+1}=\Gamma_n\cup\set{\psi(c)}, \Delta_{n+1}=\Delta_n.
+  
+  Wenn \varphi_n\in\Delta_n, dann setze \Gamma_{n+1}=\Gamma_n und \Delta_{n+1}=\Delta_n\cup\set{\psi(t_n)}.
+\end{enumerate}
+
+Mit den Regeln (\exists\IMPL) und (\IMPL\exists) folgt, dass \Gamma_{n+1}\IMPL\Delta_{n+1} nicht ableitbar.
+
+Es bleibt, zu überprüfen, dass \Gamma^*,\Delta^* die Bedingungen 1--4 des Lemmas erfüllen. Exemplarisch 1+4:
+
+\begin{enumerate}
+  \item Wenn \varphi\in\Gamma^*\cap\Delta^*, dann gibt es n\geq 0 mit \varphi\in\Gamma_n\cap\Delta_n. Dann ist \Gamma_n\IMPL\Delta_n ein Axiom und damit ableitbar, im Widerspruch zu (*).
+  
+  \item[4.] Wenn \exists x.\varphi(x)\in\Gamma^*, dann \exists x.\psi(x)\in\Gamma_m für ein m\geq 0. Dann gibt es ein n\geq m mit \varphi_n=\exists x.\psi(x). Nach (c) gilt \psi(c)\in\Gamma_{n+1}\subseteq\Gamma^* für eine Konstante c.
+  
+  Wenn \exists x.\psi(x)\in\Delta^* und t beliebiger Grundterm, dann gibt es n\geq 0 mit \exists x.\psi(x)\in\Delta_n, \varphi_n=\exists x.\psi(x) und t_n=t. Also \psi(t_n)\in\Delta_{n+1}\in\subseteq\Delta^*.
+\end{enumerate}
+\qed
+
+\subsubsection{Vollständig (kontrapositiv)}
+
+Sei \Gamma\IMPL\Delta nicht ableitbar, \Gamma^* und \Delta^* wie im Lemma.
