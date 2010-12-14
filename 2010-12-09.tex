@@ -1,3 +1,64 @@
 \section{VL von 09.~Dezember 2010}
 
+\subsection{Sequenzkalkül: Seitenbedingung}
+
+\textbf{Seitenbedingung ($\exists\IMPL$)}:
+
+Diese Bedingung ist notwendig, weil die Regel sonst nicht korrekt wäre.
+
+Beispiel:
+
+\[
+  \frac{
+    \psi[c], \varphi[c] \IMPL \psi\AND\varphi[c] \qquad\text{(gültig)}
+  }{
+    \psi[c], \exists x.\varphi(x) \IMPL \psi\AND\varphi[c] \qquad\text{(nicht gültig)}
+  }
+\]
+
+Für ($\IMPL\exists$) braucht man keine Seitenbedingung, z.B.
+
+\[
+  \frac{
+    \psi[c], \varphi[c] \IMPL \psi\AND\varphi[c]  \qquad\text{(gültig)}
+  }{
+    \psi[c], \varphi[c] \IMPL \exists x.(\psi\AND\varphi(x)) \qquad\text{(gültig)}
+  }
+\]
+
+\subsection{Sequenzkalkül: Beispiele}
+
+Beispiele für ableitbare Sequenzen:
+
+\begin{align*}
+  \underline{P(c)}, Q(c) &\IMPL \underline{P(c)}, R(c) && \text{\underline{Axiom}} \\
+  P(c), Q(c) &\IMPL P(c), Q(c) && \text{Axiom}\\
+  P(c), Q(c) &\IMPL P(c), Q(c), R(c) && \text{$\IMPL\AND$-Regel}
+\end{align*}
+
+\subsection{SK-Beweise}
+
+\begin{verbatim}
+  Ableitungsbäume von Carsten tikzen (?)
+\end{verbatim}
+
+\subsection{Korrektheitsbeweis}
+
+Zwei Regeln exemplarisch:
+
+\begin{description}
+  \item[$\OR\IMPL$]
+  Seien $\Gamma,\psi\IMPL\Delta$ und $\Gamma,\psi\IMPL\Delta$ gültig.
+  Zu zeigen: $\Gamma,\varphi\OR\psi\IMPL\Delta$ gültig. Es gelte $\Afrak\models\Gamma,\varphi\OR\psi$.
+  Dann per Semantikk auch $\Afrak\models\psi$ oder $\Afrak\models\Delta$ wegen Gültigkeit der
+  ursprünglichen Sequenzen.
+  
+  \item[$\exists\IMPL$]
+  Sei $\Gamma,\varphi[c]\IMPL\Delta$ gültig. Zu zeigen: $\Gamma,\exists x.\varphi(x)\IMPL\Delta$ gültig.
+  Es gelte $\Afrak\models\Gamma,\exists x.\varphi(x)$. Dann gibt es $a\in A$ mit $\Afrak,\set{x\mapsto a}\models\varphi(a)$.
+  Sei $\Afrak'$ wie $\Afrak$, aber mit $c^{\Afrak'}=a$. Da $c$ nicht in $\Gamma$ und $\varphi(x)$ vorkommt,
+  gilt $\Afrak'\models\Gamma,\varphi[c]$, also $\Afrak'\models\Delta$. Da $c$ nicht in $\Delta$ vorkommt,
+  folgt $\Afrak\models\Gamma$.
+\end{description}
+
 
