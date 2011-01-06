@@ -1,3 +1,112 @@
 \section{VL von 6.~Januar 2011}
 
+\subsection{Zusammenhang ist nicht FO-ausdrückbar}
 
+Angenommen, es gibt Satz $\varphi\in FO(\tau)$, der Zusammenhang ausdrückt,
+wobei $\tau=\set{E}$. Seien $c_1,c_2$ Konstantensymbole und für $n\geq 0$:
+
+\[
+  \psi_n = \NOT(\exists x_1,\dots,x_n (c_1=x_0 \AND c_2=x_1 \AND E(x_0,x_1) \AND \dots \AND E(x_{n-1},x_n)))
+\]
+
+$\psi_n$ drückt aus: \enquote{es gibt keinen Pfad der Länge $n$ von $c_1$ nach $c_2$.}
+
+Setze $\Gamma=\set{\varphi}\cup\set{\psi_n|n\geq 0}$. Offensichtlich ist
+$\Gamma$ unerfüllbar. Jede endliche Teilmenge $\Gamma_f\subseteq\Gamma$ ist
+eber erfüllbar.
+
+Sei $m$ maximal mit $\psi_m\in\Gamma_f$ Dann ist die folgende Struktur
+ein Modell von $\Gamma_f$:
+
+\begin{verbatim}
+       E      E      E        E      E
+    o ---> o ---> o ---> ... ---> o ---> o
+   c_1    a_1    a_2             a_m    c_2
+   
+  `-------------------v--------------------´
+                   m+1 Kanten
+\end{verbatim}
+
+Dies ist aber ein Widerspruch zum Kompaktheitstheorem.
+\qed
+
+\subsection{Beispiel Ehrenfeucht-Fraïssé}
+
+Sei $\tau=\set{E}$, $E$ binäres Relationssymbol.
+
+\begin{verbatim}
+  Graphen von Carsten tikzen
+\end{verbatim}
+
+\begin{tabular}{ccc}
+  Runde & Spoiler & Duplikator \\
+  1 & $a_1$ & $b_2$ \\
+  2 & $b_1$ & $a_4$ \\
+  3 & $a_3$ & $b_1$ \\
+\end{tabular}
+
+\begin{align*}
+  \delta_1 &= \begin{cases}
+    a_1 \mapsto b_1 \\
+    a_3 \mapsto b_3
+  \end{cases} && \text{ist partieller Isomorphismus} \\
+  \delta_2 &= \begin{cases}
+    a_1 \mapsto b_2 \\
+    a_2 \mapsto b_3
+  \end{cases} && \text{ist partieller Isomorphismus} \\
+  \delta_3 &= \begin{cases}
+    a_1 \mapsto b_2 \\
+    a_3 \mapsto b_3
+  \end{cases} && \text{ist kein partieller Isomorphismus} \\
+  \delta_4 &= \begin{cases}
+    a_1 \mapsto b_1 \\
+    a_3 \mapsto b_1
+  \end{cases} && \text{ist kein partieller Isomorphismus}
+\end{align*}
+
+\subsubsection{Gewinnstrategien, Beispiel 1}
+
+\begin{verbatim}
+  Graphen von Carsten tikzen
+\end{verbatim}
+
+\begin{itemize}
+  \item Duplikator gewinnt $G_0(\Afrak, \Bfrak)$.
+  
+  \item Duplikator hat Gewinnstrategie für $G_1(\Afrak,\Bfrak)$: (Graph links, Carsten, tikzen)\\
+  Jeder Pfad definiert partiellen Isomorphismus, z.B. $\set{a_1\mapsto b_2}$.
+  
+  \item Spoiler hat Gewinnstrategie für $G_2(\Afrak,\Bfrak)$: (Graph rechts, Carsten, tikzen)\\
+  Kein Pfad definiert partiellen Isomorphismus, z.B. $\set{a_1\mapsto b1, a_2\mapsto b_2}$.
+\end{itemize}
+
+\subsubsection{Gewinnstrategien, Beispiel 0}
+
+\begin{itemize}  
+  \item Duplikator hat Gewinnstrategie für $G_0(\Afrak,\Bfrak)$ und $G_1(\Afrak,\Bfrak)$
+  
+  \item Spoiler hat Gewinnstrategie für $G_2(\Afrak,\Bfrak)$ (Graph, Carsten...)
+\end{itemize}
+
+\subsection{Lemma: paarweise Äquivalenz}
+
+Beweis per Induktion über Quantorenrank ($\qr$).
+
+\begin{description}
+  \item[IA:] $k=0$\\
+  Da $\tau$ endlich und $m$ fixiert, gibt es nur endlich viele Atome.
+  Jede Formel von Quantorenrank 0 ist Boolsche Kombination solcher Atome
+  (aufgebaut mittels $\NOT, \AND, \OR$). Bis auf Äquivalenz gibt es nur
+  endlich viele solcher Kombinationen: jede davon definiert eine der
+  endlich vielen Boolschen Funktionen mit den Atomen als Aussagenvariablen.
+  
+  \item[IS:] $k>0$\\
+  Jede Formel $\varphi$ mit $\qr(\varphi)=k$ ist Boolsche Kombination von
+  \begin{itemize}
+    \item Formeln mit Quantorenrank $< k$
+    \item Formeln $Qy.\psi(\overline{x}, \overline{y})$ mit $Q\in\set{\exists,\forall}$ und $\qr(\varphi)=k-1$
+  \end{itemize}
+  Nach IV gibt es bis auf Äquivalenz nur endlich viele solcher Formeln,
+  also auch nur endlich viele Boolsche Kombinationen.
+\end{description}
+\qed
