@@ -1,3 +1,128 @@
 \section{VL von 18.~Januar 2011}
 
+\subsection{Ehrenfeucht-Fraïssé-Anwendungen}
 
+\begin{verbatim}
+  \Afrak_3:           \Bfrak_3:
+          4_____2             4_____           _____2
+          /     \             /     \         /     \
+       3 /       \         3 /       \       /       \
+        |   K_1   |         |   K_2   |     |   K_3   |
+        |         |         |         |     |         |
+         \       /           \       /       \       /
+          \_____/             \_____/         \_____/
+          1                  1
+\end{verbatim}
+
+Beste Spielweise Spoiler+Duplikator:
+
+\begin{itemize}
+  \item Spoiler wählt Element in $K_2$, dann in $K_3$
+  \item Duplikator muss zwei Elemente in $K_1$ wählen, diese sind
+  verbunden, im Gegensatz zu den vom Spoiler gewählten Elementen
+  \item Spoilers beste Strategie besteht nun in binärer Suche:
+  \enquote{halbiere die Strecke in jedem Zug}
+  \item Duplikator antwortet immer in $K_2$ oder immer in $K_3$,
+  versucht dieselben Abstände einzuhalten.
+\end{itemize}
+
+\textbf{Beweis per Induktion über $i$:}
+
+\begin{description}
+  \item[IA:] Für $i=0$ ist $(*)$ trivial erfüllt.
+  \item[IS:] Wir nehmen an, dass Spoiler im $i+1$ten Zug ein Element
+  $a=a_{i+1}\in A$ wählt. Die Wahl eines $b=b_{i+1}\in B$ kann
+  symmetrisch behandelt werden.
+  
+  Unterscheide zwei Fälle:
+  \begin{enumerate}
+    \item Es gibt $a_n\in\set{a_1,\dots,a_i}$ mit
+    $d(a_n,a)\leq \underbrace{~2^{k-(i+1)}~}_{\text{$(*)$-Schwelle für $i+1$}}$
+    
+    Betrachte die Nachbarschaften $N_{2^{k-i}}(a_n)$ und $N_{2^{k-i}}(b_n)$.
+    Es gilt $a\in N_{2^{k-i}}$. IV liefert für alle $a_j,a_l\in\set{a_1,\dots,a_i}$:
+    
+    \begin{enumerate}[label=(\Roman*)]
+      \item $a_j\in N_{2^{k-i}}(a_n)$ gdw. $b_j\in N_{2^{k-i}}(b_n)$.
+      \item Wenn $a_j,a_l\in N_{2^{k-i}}(a_n)$, dann $d(a_j,a_l)=d(b_j,b_l)$.
+    \end{enumerate}
+    
+    Also gibt es Bijektion von $N_{2^{k-i}}(a_n)$ auf $N_{2^{k-i}}(b_n)$, die
+    jedes $a_j,a_l\in\set{1,\dots,i}$ auf $b_j$ abbildet. Sei $b$ das Bild von $a$.
+    Dann gilt für alle $a_j\in\set{a_1,\dots,a_i}$:
+
+    \begin{enumerate}[label=(\Roman*),resume]
+      \item Wenn $a_j\in N_{2^{k-i}}(a_n)$, dann $d(a_j,a)=d(b_j,b)$.
+    \end{enumerate}
+    
+    Duplikator wählt dieses $b$ als $b_{i+1}$. Zu zeigen: Für alle $j\in\set{1,\dots,i+1}$:
+    \[
+      d(a_j,a)=d(b_j,b) \quad\text{oder}\quad d(a_j,a), d(b_j,b) > 2^{k-(i+1)}
+    \]
+    Zwei Fälle:
+    \begin{enumerate}[label=(\alph*)]
+      \item $a_j \in N_{2^{k-i}}(a_n)$\\
+      Dann garantiert III, dass $d(a_j,a)=d(b_j,b)$
+      
+      \item $a_j \not\in N_{2^{k-i}}(a_n)$\\
+      Offensichtlich gilt $d(a_j,a) \leq d(a_j,a)+d(a,a_n)$. Also auch
+      \begin{align*}
+        d(a_j,a) &\geq d(a_j,a_n) - d(a,a_n)\\
+                 &> 2^{k-1} - 2^{k-(i+1)}\\
+                 &= 2^{k-(i+1)}
+      \end{align*}
+    \end{enumerate}
+    
+    Nach I gilt $b_j\in N_{2^{k-i}}(a_n)$. Mit III gilt $d(b,b_n)\leq 2^{k-(i+1)}$.
+    Wir können ganz analog zeigen, dass $d(b_j,b)>2^{k-(i+1)}$.
+    
+    \item Es gibt kein $a_n\in\set{a_1,\dots,a_i}$ mit $d(a_n,a)\leq 2^{k-(i+1)}$.
+    Wir zeigen: es gibt ein $b\in B$, so dass $d(b_j,b)> 2^{k-(i+1)}$ für
+    alle $j\in\set{1,\dots,i}$. Wählt Duplikator dieses $b$ als $b_i+1$, so ist
+    $(*)$ offensichtlich erfüllt.
+    
+    Seien $b_{r_1},\dots,b_{r_n}$ die Elemente von $\set{b_1,\dots,b_i}$, die auf
+    dem Kreis in $\Bfrak$ liegen, geordnet in der Reihenfolge auf dem Kreis.
+    Angenommen, es gibt kein $b$ wie beschrieben. Dann gilt
+    $d(b_{r_l},b_{r_{l+1}} < 2^{k-1}$ für $1\leq l\leq s$, wobei $b_{r_{s+1}}=b_1$.
+    Also hat der Kreis höchstens $s\cdot 2^{k-i}\leq i\cdot 2^{k-i} = 2^{k-i+\log(i)} < 2^k$.
+    Knoten. $\lightning$
+  \end{enumerate}
+\end{description}
+\qed
+
+\subsubsection{Korollar}
+
+Für $k\geq 0$, wähle die bschriebenen Strukturren $\Afrak_k,\Bfrak_k$.
+Wenn Duplikator spielt wie beschrieben, ergibt das einen abschließenden
+Spielstand $\delta=\set{(a_1,b_1),\dots,(a_n,b_n)}$, so dass für
+$1\leq j<l\leq k$ gilt:
+\[
+  (*)\qquad d(a_i,a_l)=d(b_j,b_l) \quad\text{oder}\quad d(a_j,a_l),d(b_j,b_l) > 1
+\]
+
+Zu zeigen: $\delta$ ist partieller Isomorphismus.
+
+\begin{enumerate}
+  \item $\delta$ ist Funktion:\\
+  Wenn $a_i=a_j$, $i\not=j$, dann $d(a_i,a_j)=0$, also mit $(*)$
+  $d(b_i,_bj)=0$, also ist $b_i=b_j$.
+  
+  \item $\delta$ ist injektiv:\\
+  Wenn $a_i\not=a_j$, dann $d(a_i,a_j)>0$, also mit $(*)$ $d(b_i,b_j)>0$.
+  
+  \item $\delta$ ist Isomorphismus:
+  \begin{align*}
+    (a_i,a_j)\in E^\Afrak &~\text{gdw.}~ d(a_i,a_j) = 1\\
+                          &~\text{gdw.}~ d(b_i,b_j) = 1\\
+  \end{align*}
+\end{enumerate}
+
+\subsection{Transitive Hülle}
+
+Angenommen, es gibt FO-Formel $\varphi(x,y)$ wie im Theorem beschrieben.
+Dann ist der Zusammenhang von ungerichteten Graphen FO-ausdrückbar:
+\[
+  \forall x,y.\varphi(x,y)\qquad\lightning
+\]
+\qed
