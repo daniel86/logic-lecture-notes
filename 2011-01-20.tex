@@ -1,3 +1,69 @@
 \section{VL von 20.~Januar 2011}
 
+\subsection{Beispiele zur Semantik}
 
+\begin{align*}
+  \exists z&.P(z) \AND Q(x) \\
+  \exists X\exists z&.X(z) \AND X'(z) \\[\baselineskip]
+  \Afrak &= (\N, <) \\
+  \beta &= \set{x\mapsto 3,y\mapsto 4, X\mapsto\set{(4,3)}} \\
+  \Afrak, \beta & \not\models^? X(x,y) \\
+    &\text{da}\ (3,4) \not\in \beta(X) \\[\baselineskip]
+  \Afrak, \set{x\mapsto 3,y\mapsto 4} &\models^! \exists X.X(x,y)\\
+    &\text{z.B.}\ \beta(<) \\
+    &\text{oder}\ \beta(X) = \set{(3,4)} \\[\baselineskip]
+  \Afrak, \set{x\mapsto 3,y\mapsto 4} &\not\models \forall X.X(x,y) \\
+    &\text{da}\ \beta(X) = >
+\end{align*}
+
+\begin{verbatim}
+  \Afrak
+     1   E    2        3
+      o-----> o <---- o
+       \      |       |
+         \    |       |
+           \  |       |
+             \|       |
+              v       v
+              o ----> o
+             4         5
+\end{verbatim}
+
+\begin{align*}
+  \Afrak &= \varphi(1,5)\\
+  X &= \set{1,2,4,5} \\[\baselineskip]
+  \Afrak &= \varphi(1,3)
+\end{align*}
+
+\subsubsection{Beweis}
+
+\begin{align*}
+  \psi(X) &= \forall z,z'.(X(z) \AND E(z,z') \IMPL X(z'))\\
+  \varphi(x,y) &= \forall X.(X(x) \AND \psi(X) \IMPL X(y))
+\end{align*}
+
+\begin{description}[style=nextline]
+  \item[Behauptung:] $\Afrak\models\varphi[a,b]$ gdw. es gibt einen Pfad von $a$ nach $b$.
+  
+  \item[\enquote{$\Rightarrow$}]
+  Definiere $R=\set{\hat{a}\in A| \text{es gibt einen Pfad von a nach b}}$.
+  $\Afrak\models\psi[R]$ ist offensichtlich der Fall. Außerdem gilt $a\in R$.
+  Da $\Afrak\models\varphi(a,b)$, gilt also $b\in R$. Per Definition gibt
+  es einen Pfad von $a$ nach $b$.
+  
+  \item[\enquote{$\Leftarrow$}]
+  Sei $R\subseteq A$ beliebig und $a\in R$ sowie $\psi(R)$. Zu zeigen: $b\in R$.
+  Das folgt direkt, da $a\in R$ und alle Nachfolger von $a$ ebenfalls.
+  Die Annahme war, dass es einen Pfad von $a$ nach $b$ gibt.
+\end{description}
+
+\subsection{Beispiel 2}
+
+\begin{align*}
+  \varphi &= \exists R.\Bigl(
+    \forall x.\exists y.R(x,y) \OR R(y,x)
+    \AND \func(R)
+    \AND \func^-(R)
+    \AND \forall x.\bigl(\exists y.R(x,y) \IMPL \NOT\exists y.R(y,x)\bigr)
+  \Bigr)
+\end{align*}
