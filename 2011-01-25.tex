@@ -1,3 +1,88 @@
 \section{VL von 25.~Januar 2011}
 
+\subsection{Auswertungsproblem -- Platzbedarf Algorithmus}
+
+Die Eingabe sei eine Struktur $\Afrak$ der Größe $n$ und eine Formel
+der Größe $k$.
+
+\begin{enumerate}
+  \item In jedem Schritt ist eine Teilmenge von $A$ zu speichern, z.B.
+  über einen Bitstring der Länge $n$. Zudem ist die Rekursionstiefe
+  nach wie vor durch $k$ beschränkt, Platzbedarf also $O(n\cdot k)$.
+  
+  \item In jedem Schritt ist eine Menge von $k$-Tupeln über $A$ zu
+  speichern. Es gibt $n^k$ viele solche Tupel, Platzbedarf also
+  $O(k\cdot n^k)$.
+\end{enumerate}
+
+\subsection{SO-Tautologien nicht rekursiv aufzählbar}
+
+Wir betrachten der Einfachheit halber nur die Signatur $\tau=\set{R}$,
+$R$ 2-stellig. Wir zeigen: wären die SO-Tautologien rekursiv aufzählbar,
+so auch die \textit{erfüllbaren} FO-Formeln.
+
+Sei $\varphi\in FO(\tau)$. Es gilt:
+\begin{itemize}
+  \item $\varphi$ hat Modell der Größe $n\in\N$, gdw.
+  \[
+    \varphi_n\mapsto\exists R.\varphi
+  \]
+  gültig, wobei
+  \[
+    \varphi_n = \exists x_1,\dots,x_n.\left( \ANDop_{1\leq i < j\leq n} x_i\not=x_j \AND \ORop_{1\leq i\leq n} y=x_i \right)
+  \]
+  
+  \item $\varphi$ hat unendliches Modell gdw.
+  \[
+    \varphi_\infty \mapsto \exists R,\varphi\quad\text{gültig. (siehe SO-Beispiele)}
+  \]
+  Beachte, nach den Sätzen von Löwenheim-Skolem muss man hier niht zwischen
+  unendlichen Modellen verschiedener Kardinalität unterscheiden.
+\end{itemize}
+
+Man kann wie folgt alle erfüllbaren FO-Formeln aufzählen:
+
+\begin{itemize}
+  \item Zähle alle gültigen SO-Formeln auf.
+  \item Für jede Formel der Form $\varphi_n\mapsto\exists R,\varphi$ und
+  $\varphi_\infty\mapsto\exists R,\varphi$ mit $\varphi$ FO-Formel, gib
+  $\varphi$ aus.
+\end{itemize}
+\qed
+
+\subsection{MSO über lineare Strukturen}
+
+\begin{verbatim}
+                                  P_1
+       s    P_1    s   P_2   s    P_2   s
+  0 -------> 1 -------> 2 -------> 3 -------> 4 (zeigt auf sich selbst, Kante s)
+   \________/ \________/ \________/ \________/
+    \_________________/(<)\_________________/
+     \_____________________________________/
+                (jeder mit jedem)
+\end{verbatim}
+
+\[
+  \forall X.\left(\forall y,x. (X(y) \AND X(z) \AND (P_2(y) \AND P_2(z)) \IMPL
+    \forall z'.(y<z'<z \IMPL P_2(z'))) \right)
+\]
+
+\subsection{S1S}
+
+Beispiel für $n=1$, also $\Sigma_1=\set{0,1}$:
+
+\begin{align*}
+  \varphi_1 &= P_1(0) \AND \forall x.(\\
+    &\qquad (P_1(x) \AND \NOT last(x)) \IMPL \NOT P_1(s(x)) \AND\\
+    &\qquad (\NOT P_1(x) \AND \NOT last(x)) \IMPL P_1(s(x)) \AND\\
+    &\qquad last(x) \IMPL \NOT P_1(x)\\
+  &\quad)\\
+  \intertext{wobei $last(x)$ Abkürzung $s(x)=x$}
+  \mathcal{L}(\varphi_1) &= (10)^*\\[\baselineskip]
+  \varphi_2 &= \forall x.(\\
+    &\qquad (X(0) \AND \forall y.((X(y) \AND \NOT last(y)))\IMPL \NOT X(s(x)) \AND\\
+    &\qquad (\NOT X(y) \AND \NOT last(y)) \IMPL X(s(x)))\\
+  &\quad) \IMPL \forall y.(last(y)\IMPL X(y)) \\
+  \mathcal{L}(\varphi_1) &= \set{w\in\set{0,1}^*\mid~|w| \text{ungeradzahlig}}
+\end{align*}
 
