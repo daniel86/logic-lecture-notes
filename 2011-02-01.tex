@@ -14,7 +14,7 @@ Beispiel $n=1$, $\Sigma_1=\set{0,1}$:
 
 \subsubsection{$1\Rightarrow 2$}
 
-Sei $A=(Q,\Sigma,I,\delta,F)$ ein NEA (nicht-deterministischer endlicher
+Sei $A=(Q,\Sigma,I,\Delta,F)$ ein NEA (nicht-deterministischer endlicher
 Automat mit $\mathcal{L}(A)=L$. Wir beschreiben die Aktzeptanz eines Wortes
 durch $A$ mittels einer S1S-Formel.
 
@@ -31,8 +31,8 @@ repräsentieren.
 \begin{align*}
   \varphi_A &= \exists Y_0 \cdots \exists Y_M.(\forall x. \ANDop_{0\leq i<j\leq m} \NOT(Y_i(x)\AND Y_j(x)) && \text{\enquote{max. 1 Zustand zu jedem Zeitpunkt}} \\
     &\quad \AND Y_0(0)\OR\cdots\OR Y_M(0) && \text{\enquote{Lauf beginnt in Startzustand}} \\
-    &\quad \AND \forall x.(\NOT last(x) \IMPL \ORop_{(q_i,a,q_j)\in\delta} Y_i(x) \AND Q_a(x) \AND Y_j(s(x)) && \text{\enquote{nur erlaubte Übergänge}} \\
-    &\quad \AND \forall x.(last(x)\IMPL\ORop_{\substack{(q_i,a,q_j)\in\delta\\ q_j\in F}} Y_i(x)\AND Q_a(x)) && \text{\enquote{$A$ akzeptiert}}
+    &\quad \AND \forall x.(\NOT\last(x) \IMPL \ORop_{(q_i,a,q_j)\in\Delta} Y_i(x) \AND Q_a(x) \AND Y_j(s(x)) && \text{\enquote{nur erlaubte Übergänge}} \\
+    &\quad \AND \forall x.(\last(x)\IMPL\ORop_{\substack{(q_i,a,q_j)\in\Delta\\ q_j\in F}} Y_i(x)\AND Q_a(x)) && \text{\enquote{$A$ akzeptiert}}
 \end{align*}
 
 wobei für $a=(b_1,\dots,b_n)$ gilt:
@@ -72,11 +72,11 @@ Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für all
   
   Beispiel 1:
   \[
-    \exists x.P_i(x) \EQUIV \exists X.(Einer(X) \AND P_i\subseteq X)
+    \exists x.P_i(x) \EQUIV \exists X.(\Einer(X) \AND P_i\subseteq X)
   \]
   wobei
   \[
-    Einer(x) = \exists Y.(Y\subseteq X \AND Y=X \AND \forall Z.(Z\subseteq X \IMPL Z=X \OR Z=Y))
+    \Einer(x) = \exists Y.(Y\subseteq X \AND Y=X \AND \forall Z.(Z\subseteq X \IMPL Z=X \OR Z=Y))
   \]
   mit
   \[
@@ -88,17 +88,17 @@ Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für all
   Beispiel 2:
   \begin{align*}
     \forall x\exists y&.(s(x)=y\AND Z(y)) \\
-    \forall X&.(Einer(X)\IMPL \exists Y.(Einer(Y) \AND succ(X) = Y \AND Y\subseteq Z)
+    \forall X&.(\Einer(X)\IMPL \exists Y.(\Einer(Y) \AND\suc(X) = Y \AND Y\subseteq Z)
   \end{align*}
 \end{enumerate}
 \qed
 
 \subsubsection{$2\Rightarrow 1$}
 
-\begin{description}
+\begin{description}[style=nextline]
   \item[IA:]
   \begin{align*}
-    \varphi = X \subseteq Y && \text{also $\Sigma = \Sigma_2 = \set{0,1}^2$}\\
+    \varphi &= X \subseteq Y && \text{also $\Sigma = \Sigma_2 = \set{0,1}^2$}\\
     \mathcal{L}(\varphi) &= \set{w=\begin{pmatrix} b_1 \\ b'_1 \end{pmatrix} \cdots \begin{pmatrix} b_n \\ b'_n \end{pmatrix} \mid b_i=1 \IMPL b'_i=1}
   \end{align*}
   also $A_\varphi$ wie folgt:
@@ -107,10 +107,10 @@ Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für all
   \end{verbatim}
   
   \begin{align*}
-    \varphi &= succ(X) = Y\\
-    \mathcal{L}(\varphi) = \set{
+    \varphi &= \suc(X) = Y\\
+    \mathcal{L}(\varphi) &= \set{
       w=\begin{pmatrix} b_1 \\ b'_1 \end{pmatrix} \cdots \begin{pmatrix} b_n \\ b'_n \end{pmatrix} \mid
-      \exists k: b_k=1, b'_{k+1}=1, b_i=0 \text{für $j\not=k$}, b'_j=0 \text{für $j\not=k+1$}
+      \exists k: b_k=1, b'_{k+1}=1, b_i=0 \text{~für $j\not=k$}, b'_j=0 \text{~für $j\not=k+1$}
     }
   \end{align*}
   also $A_\varphi$ wie folgt:
@@ -120,8 +120,8 @@ Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für all
   
   \item[IS:]
   Wir nehmen reduzierte Form an, behandeln also nur $\NOT$, $\AND$, $\exists$:
-  \begin{description}
-    \item[$\varphi &= \NOT \varphi$]
+  \begin{description}[style=nextline]
+    \item[$\varphi = \NOT \varphi$]
     Nach IV gibt es Automat $A_\varphi$ mit $\mathcal{L}(\varphi)=\mathcal{L}(A_\varphi)$.
     Mittels Potenzmengenkonstruktion und Vertauschen der (nicht-)
     Endzustände \underline{erhalten} wir Automat $A_\varphi$ mit
@@ -141,12 +141,12 @@ Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für all
   
   Übergang
   \[
-    q \Longrightarrow{\begin{pmatrix}b_1\\b_2\end{pmatrix}} q' 
+    q \xrightarrow{\begin{pmatrix}b_1\\b_2\end{pmatrix}} q' 
   \]
   in $A_{\psi_1}$ liefert Übergänge
   \[
-    q \Longrightarrow{\begin{pmatrix}b_1\\b_2\\0\end{pmatrix}} q' \qquad
-    q \Longrightarrow{\begin{pmatrix}b_1\\b_2\\1\end{pmatrix}} q'
+    q \xrightarrow{\begin{pmatrix}b_1\\b_2\\0\end{pmatrix}} q' \qquad
+    q \xrightarrow{\begin{pmatrix}b_1\\b_2\\1\end{pmatrix}} q'
   \]
   
   Der Automat $A_\psi$ ergibt sich mittels Produktkonstruktion aus den
@@ -164,11 +164,9 @@ IV liefert $A_\psi$ über Alphabet $\Sigma_{n+1}$ Automat $A_\varphi$.
 \begin{itemize}
   \item Ersetze jeden Übergang:
   \[
-    q \Longrightarrow{\begin{pmatrix}b_0\\b_1\\\vdots\\b_2\end{pmatrix}} q' 
-  \]
-  wird
-  \[
-    q \Longrightarrow{\begin{pmatrix}b_1\\\vdots\\b_2\end{pmatrix}} q' 
+    q \xrightarrow{\begin{pmatrix}b_0\\b_1\\\vdots\\b_2\end{pmatrix}} q' 
+    \qquad \text{wird zu} \qquad
+    q \xrightarrow{\begin{pmatrix}b_1\\\vdots\\b_2\end{pmatrix}} q' 
   \]
   denn die Interpretation von $Y$ ist für $\varphi$ irrelevant.
 \end{itemize}

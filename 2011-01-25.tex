@@ -73,16 +73,16 @@ Beispiel für $n=1$, also $\Sigma_1=\set{0,1}$:
 
 \begin{align*}
   \varphi_1 &= P_1(0) \AND \forall x.(\\
-    &\qquad (P_1(x) \AND \NOT last(x)) \IMPL \NOT P_1(s(x)) \AND\\
-    &\qquad (\NOT P_1(x) \AND \NOT last(x)) \IMPL P_1(s(x)) \AND\\
-    &\qquad last(x) \IMPL \NOT P_1(x)\\
+    &\qquad (P_1(x) \AND \NOT\last(x)) \IMPL \NOT P_1(s(x)) \AND\\
+    &\qquad (\NOT P_1(x) \AND \NOT\last(x)) \IMPL P_1(s(x)) \AND\\
+    &\qquad \last(x) \IMPL \NOT P_1(x)\\
   &\quad)\\
-  \intertext{wobei $last(x)$ Abkürzung $s(x)=x$}
+  \intertext{wobei $\last(x)$ Abkürzung $s(x)=x$}
   \mathcal{L}(\varphi_1) &= (10)^*\\[\baselineskip]
   \varphi_2 &= \forall x.(\\
-    &\qquad (X(0) \AND \forall y.((X(y) \AND \NOT last(y)))\IMPL \NOT X(s(x)) \AND\\
-    &\qquad (\NOT X(y) \AND \NOT last(y)) \IMPL X(s(x)))\\
-  &\quad) \IMPL \forall y.(last(y)\IMPL X(y)) \\
+    &\qquad (X(0) \AND \forall y.((X(y) \AND \NOT\last(y)))\IMPL \NOT X(s(x)) \AND\\
+    &\qquad (\NOT X(y) \AND \NOT \last(y)) \IMPL X(s(x)))\\
+  &\quad) \IMPL \forall y.(\last(y)\IMPL X(y)) \\
   \mathcal{L}(\varphi_1) &= \set{w\in\set{0,1}^*\mid~|w| \text{ungeradzahlig}}
 \end{align*}
 
