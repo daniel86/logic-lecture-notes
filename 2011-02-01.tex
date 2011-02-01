@@ -1,0 +1,175 @@
+\section{VL von 01.~Februar 2011}
+
+\subsection{S1S Beispiele}
+
+Beispiel $n=1$, $\Sigma_1=\set{0,1}$:
+
+\begin{align*}
+  \varphi_3 &= \NOT\exists x.(P_1(x)\AND\NOT P_1(s(x))) \\
+    &\quad \OR \NOT\exists x.(\NOT P_1(s)\AND P_1(s(x))) \\
+  \mathcal{L}(\varphi_3) &= 0^*1^* \cup 1^*0^* \\
+\end{align*}
+
+\subsection{Büchi-Elgot-Trakhtenbrot}
+
+\subsubsection{$1\Rightarrow 2$}
+
+Sei $A=(Q,\Sigma,I,\delta,F)$ ein NEA (nicht-deterministischer endlicher
+Automat mit $\mathcal{L}(A)=L$. Wir beschreiben die Aktzeptanz eines Wortes
+durch $A$ mittels einer S1S-Formel.
+
+Sei
+\begin{align*}
+  Q &= \set{q_0,\dots,q_n}\\
+  I &= \set{q_0,\dots,q_k} \quad\text{für ein $k\leq n$}\\
+\end{align*}
+
+Wir verwenden SO-Variablen $Y_0,\dots,Y_m$ um den aktuellen Zustand von
+$A$ während eines (erfolgreichen) Laufes auf dem Eingabewort zu
+repräsentieren.
+
+\begin{align*}
+  \varphi_A &= \exists Y_0 \cdots \exists Y_M.(\forall x. \ANDop_{0\leq i<j\leq m} \NOT(Y_i(x)\AND Y_j(x)) && \text{\enquote{max. 1 Zustand zu jedem Zeitpunkt}} \\
+    &\quad \AND Y_0(0)\OR\cdots\OR Y_M(0) && \text{\enquote{Lauf beginnt in Startzustand}} \\
+    &\quad \AND \forall x.(\NOT last(x) \IMPL \ORop_{(q_i,a,q_j)\in\delta} Y_i(x) \AND Q_a(x) \AND Y_j(s(x)) && \text{\enquote{nur erlaubte Übergänge}} \\
+    &\quad \AND \forall x.(last(x)\IMPL\ORop_{\substack{(q_i,a,q_j)\in\delta\\ q_j\in F}} Y_i(x)\AND Q_a(x)) && \text{\enquote{$A$ akzeptiert}}
+\end{align*}
+
+wobei für $a=(b_1,\dots,b_n)$ gilt:
+\[
+  Q_a = \ANDop_{\substack{1\leq i\leq n\\ b_i=0}} \NOT P_i \AND \ANDop_{\substack{1\leq i\leq n\\ b_i=1}} P_j
+\]
+
+Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für alle $w\in\Sigma^*$.
+\qed
+
+\subsection{S1S-Normalform}
+
+\begin{enumerate}
+  \item Schritt 1: Symbole $0$ und $<$ eliminieren:
+  \begin{itemize}
+    \item Elimination von $0$:
+    \[
+      \varphi \EQUIV \exists x.(\NOT\exists y.(s(y)=x \AND \varphi[0/x]))
+    \]
+    \item Elimination von $<$:
+    \[
+      t<t' \EQUIV \exists X.(X(t') \AND \forall z.(X(z)\IMPL X(s(z))) \AND \NOT X(t))
+    \]
+  \end{itemize}
+  \item Schtitt 2: Scachtelung von \enquote{$s$} eliminieren, z.B.:
+  \begin{align*}
+    x = s(s(s(y))) &\\
+      & \EQUIV \\
+      & \exists z_1\exists z_2.(z_1=s(y) \AND z_2=s(z_1) \AND x=s(z_2))
+  \end{align*}
+  \item Schritt 3: Umschreiben atomater Formeln, so dass nur $x=y$,
+  $s(x)=y$, $P_i(x)$, $X(x)$ verbleiben, z.B.:
+  \[
+    P_i(s(x)) \EQUIV \exists y.(y=s(x) \AND P_i(y))
+  \]
+  \item Schritt 4: Eliminieren von FO-Variablen in Quantoren und Atome.
+  
+  Beispiel 1:
+  \[
+    \exists x.P_i(x) \EQUIV \exists X.(Einer(X) \AND P_i\subseteq X)
+  \]
+  wobei
+  \[
+    Einer(x) = \exists Y.(Y\subseteq X \AND Y=X \AND \forall Z.(Z\subseteq X \IMPL Z=X \OR Z=Y))
+  \]
+  mit
+  \[
+    Y=X \quad \EQUIV \quad Y\subseteq X \AND X\subseteq Y
+  \]
+  
+  \strut\hfill\textit{\enquote{$X$ hat genau eine echte Teilmenge, also: $X$ Einermenge}}
+  
+  Beispiel 2:
+  \begin{align*}
+    \forall x\exists y&.(s(x)=y\AND Z(y)) \\
+    \forall X&.(Einer(X)\IMPL \exists Y.(Einer(Y) \AND succ(X) = Y \AND Y\subseteq Z)
+  \end{align*}
+\end{enumerate}
+\qed
+
+\subsubsection{$2\Rightarrow 1$}
+
+\begin{description}
+  \item[IA:]
+  \begin{align*}
+    \varphi = X \subseteq Y && \text{also $\Sigma = \Sigma_2 = \set{0,1}^2$}\\
+    \mathcal{L}(\varphi) &= \set{w=\begin{pmatrix} b_1 \\ b'_1 \end{pmatrix} \cdots \begin{pmatrix} b_n \\ b'_n \end{pmatrix} \mid b_i=1 \IMPL b'_i=1}
+  \end{align*}
+  also $A_\varphi$ wie folgt:
+  \begin{verbatim}
+    Automat tikzen
+  \end{verbatim}
+  
+  \begin{align*}
+    \varphi &= succ(X) = Y\\
+    \mathcal{L}(\varphi) = \set{
+      w=\begin{pmatrix} b_1 \\ b'_1 \end{pmatrix} \cdots \begin{pmatrix} b_n \\ b'_n \end{pmatrix} \mid
+      \exists k: b_k=1, b'_{k+1}=1, b_i=0 \text{für $j\not=k$}, b'_j=0 \text{für $j\not=k+1$}
+    }
+  \end{align*}
+  also $A_\varphi$ wie folgt:
+  \begin{verbatim}
+    Automat tikzen
+  \end{verbatim}
+  
+  \item[IS:]
+  Wir nehmen reduzierte Form an, behandeln also nur $\NOT$, $\AND$, $\exists$:
+  \begin{description}
+    \item[$\varphi &= \NOT \varphi$]
+    Nach IV gibt es Automat $A_\varphi$ mit $\mathcal{L}(\varphi)=\mathcal{L}(A_\varphi)$.
+    Mittels Potenzmengenkonstruktion und Vertauschen der (nicht-)
+    Endzustände \underline{erhalten} wir Automat $A_\varphi$ mit
+    $\mathcal{L}(A_\varphi)=\mathcal{L}(A_\psi)=\mathcal{L}(\varphi)$.
+    
+    \item[$\varphi = \psi_1 \AND \psi_2$]
+    Im Prinzip konstruieren wir den Produktautomaten. Kleine
+    Schwierigkeit: freie Variablen in $\psi_1$, $\psi_2$ müssen nicht
+    übereinstimmen, z.B.
+    \[
+      \varphi(\underbrace{X_1,X_2,X_3}{\text{freie Variablen/Prädikate}}) = \psi_1(X_1,X_2) \AND \psi_2(X_2,X_3)
+    \]
+  \end{description}
+  
+  Nach IV existieren Automaten $A_{\psi_1}$ und $A_{\psi_2}$. Diese
+  erweitert man zunächst, um die Alphabete anzugleichen. Im Beispiel:
+  
+  Übergang
+  \[
+    q \Longrightarrow{\begin{pmatrix}b_1\\b_2\end{pmatrix}} q' 
+  \]
+  in $A_{\psi_1}$ liefert Übergänge
+  \[
+    q \Longrightarrow{\begin{pmatrix}b_1\\b_2\\0\end{pmatrix}} q' \qquad
+    q \Longrightarrow{\begin{pmatrix}b_1\\b_2\\1\end{pmatrix}} q'
+  \]
+  
+  Der Automat $A_\psi$ ergibt sich mittels Produktkonstruktion aus den
+  modifizierten Automaten. Dann ist $\mathcal{L}(A_\psi)=\mathcal{L}(\varphi)$.
+\end{description}
+
+\[
+  \varphi = \exists Y.\psi(Y, X_1, \dots, X_n)
+\]
+
+IV liefert $A_\psi$ über Alphabet $\Sigma_{n+1}$ Automat $A_\varphi$.
+Über Alphabet $\Sigma_n$ erhält man durch folgende Modifikation der
+Übergänge (\enquote{Projektion}):
+
+\begin{itemize}
+  \item Ersetze jeden Übergang:
+  \[
+    q \Longrightarrow{\begin{pmatrix}b_0\\b_1\\\vdots\\b_2\end{pmatrix}} q' 
+  \]
+  wird
+  \[
+    q \Longrightarrow{\begin{pmatrix}b_1\\\vdots\\b_2\end{pmatrix}} q' 
+  \]
+  denn die Interpretation von $Y$ ist für $\varphi$ irrelevant.
+\end{itemize}
+\qed
