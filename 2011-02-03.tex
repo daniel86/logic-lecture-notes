@@ -99,15 +99,15 @@ Prozesse warten nicht grundlos:
 \begin{verbatim}
   |-------+-------+-------+-------+-------|
           |       p
-     \bigcirc p
+          \bigcirc p
 
   |-------+-------+-------+-------+-------|
           |               p
-    \diamondsuit p
+          \diamondsuit p
 
   |-------+-------+-------+-------+-------|
           |       p       p       p       p
-      \square p
+          \square p
 
   |-------+-------+-------+-------+-------|
           |       p       p       q
@@ -117,11 +117,11 @@ Prozesse warten nicht grundlos:
 
 Es gelten die Äquivalenten
 \begin{itemize}
-  \item $\diamondsuit \varphi \EQUIV \Until{true}{\varphi}$ mit $true = p\AND\NOT p$,
+  \item $\diamondsuit \varphi \EQUIV \Until{\true}{\varphi}$ mit $\true = p\AND\NOT p$, und
   \item $\square \varphi \EQUIV \NOT\diamondsuit\NOT \varphi$.
 \end{itemize}
 
-Es genügt also eigentlich auch $\bigcirc$ und $\mathcal{U}$ als temporale Operatoten.
+Es genügen also eigentlich auch $\bigcirc$ und $\mathcal{U}$ als temporale Operatoren.
 
 
 \subsubsection{F1S}
@@ -130,13 +130,14 @@ Wir übersetzen LTL-Formeln $\varphi$ in F1S-Formel $\widehat{\varphi}(x)$ mit f
 Variable $x$, per Induktion über die Struktur von $\varphi$:
 
 \begin{align*}
-  \widehat{p_i}(x) &= P_i(x) \\
-  \widehat{\NOT\varphi}(x) &= \NOT\widehat{\varphi}(x) \\
-  \widehat{\varphi\AND\psi}(x) &= \widehat{\varphi}(x)\AND\widehat{\psi}(x) && \text{ebenso für $\OR$} \\
-  \widehat{\bigcirc\varphi}(x) &= \exists y.(y=s(x) \AND \widehat{\varphi}(y)) \\
-  \widehat{\diamondsuit\varphi}(x) &= \exists y.(x\subseteq y \AND \widehat{\varphi}(y)) \\
-  \widehat{\square\varphi}(x) &= \forall y.(x\subseteq y \IMPL \widehat{\varphi}(y)) \\
-  \widehat{\Until{\varphi}{\psi}}(x) &= \exists y.(x\subseteq y \AND \widehat{\psi}(y) \AND \forall z.(x\subseteq z < y && \text{\textcolor{red}{unvollständig!}}
+  \widehat{p_i}(x)                   &= P_i(x) \\
+  \widehat{\NOT\varphi}(x)           &= \NOT\widehat{\varphi}(x) \\
+  \widehat{\varphi\AND\psi}(x)       &= \widehat{\varphi}(x)\AND\widehat{\psi}(x) \\
+  \widehat{\varphi\OR\psi}(x)        &= \widehat{\varphi}(x)\OR\widehat{\psi}(x) \\
+  \widehat{\bigcirc\varphi}(x)       &= \exists y.(y=s(x) \AND \widehat{\varphi}(y)) \\
+  \widehat{\diamondsuit\varphi}(x)   &= \exists y.(x\subseteq y \AND \widehat{\varphi}(y)) \\
+  \widehat{\square\varphi}(x)        &= \forall y.(x\subseteq y \IMPL \widehat{\varphi}(y)) \\
+  \widehat{\Until{\varphi}{\psi}}(x) &= \exists y.(x\subseteq y \AND \widehat{\psi}(y) \AND \forall z.(x\subseteq z < y \IMPL \widehat{\varphi}(z)))
 \end{align*}
 
 Die konstruierte Formel ist sogar vollständig äquivalent, als
