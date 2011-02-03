@@ -10,7 +10,7 @@ Beispiel $n=1$, $\Sigma_1=\set{0,1}$:
   \mathcal{L}(\varphi_3) &= 0^*1^* \cup 1^*0^* \\
 \end{align*}
 
-\subsection{Büchi-Elgot-Trakhtenbrot}
+\subsection{Theorem Büchi-Elgot-Trakhtenbrot}
 
 \subsubsection{$1\Rightarrow 2$}
 
@@ -43,7 +43,7 @@ wobei für $a=(b_1,\dots,b_n)$ gilt:
 Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für alle $w\in\Sigma^*$.
 \qed
 
-\subsection{S1S-Normalform}
+\subsubsection{S1S-Normalform}
 
 \begin{enumerate}
   \item Schritt 1: Symbole $0$ und $<$ eliminieren:
@@ -146,7 +146,7 @@ Leicht zu sehen: $w\in\mathcal{L}(A)$ gdw. $w\in\mathcal{L}(\varphi_A)$ für all
   in $A_{\psi_1}$ liefert Übergänge
   \[
     q \xrightarrow{\begin{pmatrix}b_1\\b_2\\0\end{pmatrix}} q' \qquad
-    q \xrightarrow{\begin{pmatrix}b_1\\b_2\\1\end{pmatrix}} q'
+    q \xrightarrow{\begin{pmatrix}b_1\\b_2\\1\end{pmatrix}} q' ~\text{.}
   \]
   
   Der Automat $A_\psi$ ergibt sich mittels Produktkonstruktion aus den
@@ -165,8 +165,8 @@ IV liefert $A_\psi$ über Alphabet $\Sigma_{n+1}$ Automat $A_\varphi$.
   \item Ersetze jeden Übergang:
   \[
     q \xrightarrow{\begin{pmatrix}b_0\\b_1\\\vdots\\b_2\end{pmatrix}} q' 
-    \qquad \text{wird zu} \qquad
-    q \xrightarrow{\begin{pmatrix}b_1\\\vdots\\b_2\end{pmatrix}} q' 
+    \qquad \text{durch} \qquad
+    q \xrightarrow{\begin{pmatrix}b_1\\\vdots\\b_2\end{pmatrix}} q' ~\text{,}
   \]
   denn die Interpretation von $Y$ ist für $\varphi$ irrelevant.
 \end{itemize}

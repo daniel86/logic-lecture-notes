@@ -5,10 +5,24 @@
 \usepackage[sc,osf]{mathpazo}
 \usepackage[german=guillemets]{csquotes}
 \usepackage[fleqn]{amsmath}
-\usepackage{amssymb,parskip,xspace,textcomp,latexsym,stmaryrd,enumitem,url,booktabs,array}
+\usepackage{amssymb,parskip,xspace,textcomp,latexsym,stmaryrd,enumitem,booktabs,array}
 \usepackage[margin=3cm]{geometry}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\usepackage[
+  bookmarks=true,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  linktocpage=false,
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  filecolor=black,
+  urlcolor=black,
+  frenchlinks=false,
+  breaklinks=true,
+  pdffitwindow=true
+]{hyperref}
 
 \DeclareMathOperator{\AND}{\wedge}
 \DeclareMathOperator{\OR}{\vee}
@@ -52,6 +66,9 @@
 \def\III{\roem{III}}
 \def\qed{\strut\\\null\hfill$\square$}
 \def\QED{\strur\\\null\hfill$\blacksquare$}
+
+\def\Until#1#2{\ensuremath{#1\,\mathcal{U}\,#2}}
+\def\Since#1#2{\ensuremath{#1\,\mathcal{S}\,#2}}
 
 \def\VL#1{\newpage\input#1}
 

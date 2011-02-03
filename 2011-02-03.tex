@@ -1,3 +1,144 @@
 \section{VL von 03.~Februar 2011}
 
+\subsection{Beispiel}
 
+\[
+  \varphi = \exists X,Y.(X\subseteq P_1 \AND Y\subseteq P_2 \AND \suc(X) = Y)
+\]
+
+Die Sprache $\mathcal{L}(\varphi)\subseteq\Sigma_2=\set{0,1}^2$ ist
+\[
+  \Sigma_2^* \cdot \left(
+    \begin{pmatrix} 1\\0 \end{pmatrix}
+    \cup
+    \begin{pmatrix} 1\\1 \end{pmatrix}
+  \right)
+  \cdot \left(
+    \begin{pmatrix} 0\\1 \end{pmatrix}
+    \cup
+    \begin{pmatrix} 1\\1 \end{pmatrix}
+  \right)
+  \cdot \Sigma_2^*
+\]
+
+Zur Erinnerung: jedes Relationssymbol $P_i$ und jede freie Variable
+wird durch ein \enquote{Bit} repräsentiert.
+
+Reihenfolge: $X,Y,P_1,P_2$
+
+\begin{itemize}
+  \item $A_{X\subseteq P_1}$
+  \begin{verbatim}
+    Automat tikzen
+  \end{verbatim}
+
+  \item $A_{Y\subseteq P_2}$
+  \begin{verbatim}
+    Automat tikzen
+  \end{verbatim}
+
+  \item $A_{\suc(x)=Y}$
+  \begin{verbatim}
+    Automat tikzen
+  \end{verbatim}
+
+  \item $X\subseteq P_1 \AND Y\subseteq P_2 \AND \suc(X)=Y$
+  \begin{enumerate}
+    \item Erweitern der Signaturen/Spuren (Reihenfolge siehe oben)
+    \item Produktautomat bauen:
+    \begin{verbatim}
+      Automat tikzen
+    \end{verbatim}
+  \end{enumerate}
+  
+  \item $A_\varphi$: Projektion
+  \begin{verbatim}
+    Automat tikzen
+  \end{verbatim}  
+\end{itemize}
+
+\subsection{Beispiele sternfreier Sprachen}
+
+\begin{align*}
+  \Sigma^* 
+    \quad\text{dargestellt}\quad&
+    \overline{\emptyset} \\
+  (10)^* 
+    \quad\text{dargestellt}\quad&
+    (\set{1}\circ\Sigma^*\circ\set{0}) \cap
+      \overline{(\Sigma^*\circ\set{0}\circ\set{0}\circ\Sigma^*)} \cap
+      \overline{(\Sigma^*\circ\set{1}\circ\set{1}\circ\Sigma^*)} \\
+    \EQUIV\quad&
+      (1\Sigma^*0) \cap \overline{(\Sigma^*00\Sigma^*)} \cap \overline{(\Sigma^*11\Sigma^*)} \\
+  1^*0^*\cup 0^*1^*
+    \quad\text{dargestellt}\quad&
+    \overline{\Sigma^*01\Sigma^*} \cup \overline{\Sigma^*10\Sigma^*}
+\end{align*}
+
+\subsection{LTL -- Beispiele}
+
+\[
+  \bigcirc\varphi \qquad \diamondsuit\varphi \qquad \square\varphi \qquad \Until{\varphi}{\psi}
+\]
+
+Der Wartezustand wird nur durch Ausführen des kritischen Abschnittes beendet:
+
+\[
+  \ANDop_{i\in\set{1,2}} \square (W_i \IMPL (\Until{W_i}{A_i} \OR \square W_i))
+\]
+
+Prozesse warten nicht grundlos:
+
+\begin{align*}
+                    & \square ((W_1\OR W_2) \IMPL (A_1\OR A_2)) \\
+  \text{oder} \quad & \square ((W_1\OR W_2) \IMPL \bigcirc(A_1\OR A_2))
+\end{align*}
+
+\subsubsection{Semantik LTL}
+
+\begin{verbatim}
+  |-------+-------+-------+-------+-------|
+          |       p
+     \bigcirc p
+
+  |-------+-------+-------+-------+-------|
+          |               p
+    \diamondsuit p
+
+  |-------+-------+-------+-------+-------|
+          |       p       p       p       p
+      \square p
+
+  |-------+-------+-------+-------+-------|
+          |       p       p       q
+        p U q
+          p
+\end{verbatim}
+
+Es gelten die Äquivalenten
+\begin{itemize}
+  \item $\diamondsuit \varphi \EQUIV \Until{true}{\varphi}$ mit $true = p\AND\NOT p$,
+  \item $\square \varphi \EQUIV \NOT\diamondsuit\NOT \varphi$.
+\end{itemize}
+
+Es genügt also eigentlich auch $\bigcirc$ und $\mathcal{U}$ als temporale Operatoten.
+
+
+\subsubsection{F1S}
+
+Wir übersetzen LTL-Formeln $\varphi$ in F1S-Formel $\widehat{\varphi}(x)$ mit freier
+Variable $x$, per Induktion über die Struktur von $\varphi$:
+
+\begin{align*}
+  \widehat{p_i}(x) &= P_i(x) \\
+  \widehat{\NOT\varphi}(x) &= \NOT\widehat{\varphi}(x) \\
+  \widehat{\varphi\AND\psi}(x) &= \widehat{\varphi}(x)\AND\widehat{\psi}(x) && \text{ebenso für $\OR$} \\
+  \widehat{\bigcirc\varphi}(x) &= \exists y.(y=s(x) \AND \widehat{\varphi}(y)) \\
+  \widehat{\diamondsuit\varphi}(x) &= \exists y.(x\subseteq y \AND \widehat{\varphi}(y)) \\
+  \widehat{\square\varphi}(x) &= \forall y.(x\subseteq y \IMPL \widehat{\varphi}(y)) \\
+  \widehat{\Until{\varphi}{\psi}}(x) &= \exists y.(x\subseteq y \AND \widehat{\psi}(y) \AND \forall z.(x\subseteq z < y && \text{\textcolor{red}{unvollständig!}}
+\end{align*}
+
+Die konstruierte Formel ist sogar vollständig äquivalent, als
+$\Afrak,n\models\varphi$ gdw. $\Afrak\models\hat{\varphi}[n]$ für alle
+$\Afrak$ \textbf{und alle $\mathbf{n}$}.
