@@ -1,3 +1,27 @@
 \section{VL von 08.~Februar 2011}
 
+\subsection{Hamiltonkreis}
 
+Angenommen, $\Afrak$ enthält Hamiltonkreis $a_1,\dots,a_n$.
+
+Setze 
+\begin{align*}
+  S^\Afrak &= \set{(a_i,a_{i+1} \mid 1\leq i\leq n,\ \text{wobei}\ a_{n+1} := a_1} \\
+  L^\Afrak &= \text{transitive Hülle von}\ S\backslash\set{(a_n,a_1)}
+\end{align*}
+
+Man überprüft leicht, dass alle FO-Formeln in $\varphi_\HK$ erfüllt sind,
+also $\Afrak\models\varphi_\HK$.
+
+Angenommen, $\Afrak\models\varphi_\HK$. Seien $L^\Afrak$ und $S^\Afrak$
+Relationen, so dass alle FO-Formeln in $\varphi_HK$ erfüllt sind.
+Damit ist $S^\Afrak$ ein Hamiltonkreis:
+
+\begin{itemize}
+  \item $S^\Afrak$ ist ein Kreis (3. Konjunkt)
+  \item $S^\Afrak$ enthält nur Kanten aus $E$ (4. Konjunkt)
+  \item $S^\Afrak$ enthält alle Elemente, weil $L$ alle Elemente enthält (2. Konjunkt)
+  \item jedes Element taucht höchsten einmal in $S^\Afrak$ auf, da $S^\Afrak$
+  Nachfolgerelation einer (zyklenfreien!) linearen Ordnung ist.
+\end{itemize}
+\qed
